@@ -3,12 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Qualquer coisa!</title>
-		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		
+		<!-- Includes for css styles -->
+		<link href="css/bootstrap-combined.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-
-		<script type="text/javascript" src="js-library/jquery-2.1.4.min.js"></script>
+		
+		<!-- Includes for bootstrap and jquery script -->
+		<script src="js-library/jquery-2.1.4.min.js"></script>
 		<script src="js-library/d3.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+		<script src="js-library/bootstrap.min.js"></script>
 
 		<!-- Includes for the map -->
 
@@ -28,20 +31,20 @@
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a class="atab" href="#a_tab" data-toggle="tab">Explorar</a>
+					<a class="exploretab" href="#explore_tab" data-toggle="tab">Explorar</a>
 				</li>
 				<li>
-					<a class="btab" href="#b_tab" data-toggle="tab">Comparar</a>
+					<a class="comparetab" href="#compare_tab" data-toggle="tab">Comparar</a>
 				</li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="a_tab">
+				<div class="tab-pane active" id="explore_tab">
 					<h1>Explorar</h1>
 
 					<div id="mapdiv"></div>
 					<acontent></acontent>
 				</div>
-				<div class="tab-pane" id="b_tab">
+				<div class="tab-pane" id="compare_tab">
 					<h1>Comparar</h1>
 					<bcontent></bcontent>
 				</div>
