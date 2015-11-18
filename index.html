@@ -42,7 +42,9 @@
 					<h1>Explorar</h1>
 
 					<div id="mapdiv"></div>
-					<acontent></acontent>
+					<div id="chart-container">
+						<explorecontent></explorecontent>
+					</div>
 				</div>
 				<div class="tab-pane" id="compare_tab">
 					<h1>Comparar</h1>
@@ -59,12 +61,12 @@
 			});
 
 			$.getScript("js/explore.js");
-			$(".atab").click(function() {
+			$(".exploretab").click(function() {
 				$.getScript("js/explore.js");
 			})
 		</script>
 		<script>
-			$(".btab").click(function() {
+			$(".comparetab").click(function() {
 				$.getScript("js/compare.js");
 			})
 		</script>
