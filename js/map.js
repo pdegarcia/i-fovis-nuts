@@ -30,11 +30,6 @@ var regions = {
 		color : "#8D725F",
 		passZoomValuesToTarget : true
 	}, {
-		id : "PT-M",
-		linkToObject : cities,
-		color : "#BE8045",
-		passZoomValuesToTarget : true
-	}, {
 		id : "PT-N",
 		linkToObject : cities,
 		color : "#BE8045",
