@@ -47,7 +47,13 @@ var map = AmCharts.makeChart("mapdiv", {
 		color : "#BBBB00"
 	},
 
-	dataProvider : regions
+	dataProvider : regions,
+	smallMap :{},
+	"responsive": {
+          "enabled": true
+   },
+   mouseWheelZoomEnabled : true,
+   zoomDuration : 0.3
 
 });
 
