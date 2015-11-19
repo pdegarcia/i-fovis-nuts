@@ -12,48 +12,55 @@ var regions = {
 	areas : [{
 		id : "PT-ALE",
 		linkToObject : cities,
-		color : "#C8AB67",
+		color : "#CCCCCC",
 		passZoomValuesToTarget : true
 	}, {
 		id : "PT-ALG",
 		linkToObject : cities,
-		color : "#93644A",
+		color : "#CCCCCC",
 		passZoomValuesToTarget : true
 	}, {
 		id : "PT-C",
 		linkToObject : cities,
-		color : "#AA805A",
+		color : "#CCCCCC",
 		passZoomValuesToTarget : true
 	}, {
 		id : "PT-L",
 		linkToObject : cities,
-		color : "#8D725F",
+		color : "#CCCCCC",
 		passZoomValuesToTarget : true
 	}, {
 		id : "PT-N",
 		linkToObject : cities,
-		color : "#BE8045",
+		color : "#CCCCCC",
 		passZoomValuesToTarget : true
 	}]
-	
+
 };
 
 var map = AmCharts.makeChart("mapdiv", {
 	type : "map",
 	areasSettings : {
 		autoZoom : true,
-		rollOverOutlineColor : "#000000",
-		selectedColor : "#BBBB00",
-		color : "#BBBB00"
+		rollOverOutlineColor : "#555555",
+		selectedColor : "#5EB7DE",
+		color : "#CCCCCC",
+		colorSolid : "#5EB7DE",
+		rollOverColor : "#9EC2F7",
+		selectable : true
 	},
-
+	fitMapToContainer: true,
+	
 	dataProvider : regions,
-	smallMap :{},
-	"responsive": {
-          "enabled": true
-   },
-   mouseWheelZoomEnabled : true,
-   zoomDuration : 0.3
+	smallMap : {},
+	"responsive" : {
+		"enabled" : true
+	},
+	mouseWheelZoomEnabled : true,
+	zoomDuration : 0.3,
+	zoomControl : {
+		zoomControlEnabled : true
+	}
 
 });
 
@@ -71,4 +78,4 @@ function handleMapObjectClick(event) {
 // monitor when home icon was clicked and also go to continents map
 
 map.addListener("homeButtonClicked", handleGoHome);
-map.addListener("clickMapObject", handleMapObjectClick); 
+map.addListener("clickMapObject", handleMapObjectClick);
