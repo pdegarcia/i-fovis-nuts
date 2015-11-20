@@ -7,7 +7,7 @@ var w = $("#graph-container").width();
 
 // Set the dimensions of the canvas / graph
 var margin = {top: h*0.05, right: w*0.025, bottom: h*0.05, left: w*0.06},
-  width = w*0.5 - margin.left - margin.right,
+  width = w*0.45 - margin.left - margin.right,
   height = h*0.45 - margin.top - margin.bottom;
 
 // Parse the date / time
