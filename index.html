@@ -15,6 +15,7 @@
 	<script src="js-library/bootstrap.min.js"></script>
 	
 	<script src="js/dropdown.js"></script>
+	<script src="js/layout.js"></script>
 
 	<!-- Includes for the map -->
 
@@ -43,13 +44,14 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="explore_tab">
-				<h1>Explorar</h1>
-
 				<div id="dropdown_container"></div>
-				<div id="mapdiv"></div>
-				<div id="chart-container">
-					<explorecontent class="D3graph"></explorecontent>
-				</div>
+				<div id="globalcontainer">
+					<div id="mapdiv"></div>
+					<div id="chart-container">
+						<div id="graph-container"> 
+							<explorecontent class="D3graph"></explorecontent></div>
+					</div>
+				</div>	
 			</div>
 			<div class="tab-pane" id="compare_tab">
 				<h1>Comparar</h1>

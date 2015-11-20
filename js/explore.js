@@ -2,10 +2,13 @@
 
 $("explorecontent").empty();
 
+var h = $("#graph-container").height();
+var w = $("#graph-container").width();
+
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-  width = 400 - margin.left - margin.right,
-  height = 220 - margin.top - margin.bottom;
+var margin = {top: h*0.05, right: w*0.025, bottom: h*0.05, left: w*0.06},
+  width = w*0.5 - margin.left - margin.right,
+  height = h*0.45 - margin.top - margin.bottom;
 
 // Parse the date / time
 var parseDate = d3.time.format("%d-%b-%y").parse;
@@ -33,7 +36,6 @@ var chart1 = d3.select("explorecontent")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 // Get the data
 d3.csv("data1.csv", function(error, data) {
   data.forEach(function(d) {
@@ -60,6 +62,14 @@ d3.csv("data1.csv", function(error, data) {
   chart1.append("g")
     .attr("class", "y axis")
     .call(yAxis);
+
+  chart1.append("text")
+    .attr("x", (width / 2))             
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")  
+    .style("font-size", "16px") 
+    .style("font-weight", "bold")  
+    .text("Ganho Por Nível de Escolaridade");
 
 });
 
@@ -98,15 +108,23 @@ d3.csv("data1.csv", function(error, data) {
     .attr("class", "y axis")
     .call(yAxis);
 
+  chart2.append("text")
+    .attr("x", (width / 2))             
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")  
+    .style("font-size", "16px") 
+    .style("font-weight", "bold")  
+    .text("Poder de Compra per capita");
+
 });
 
 // Adds the svg canvas - TERCEIRO GRAFICO - CONSULTAS POR HABITANTE
 var chart3 = d3.select("explorecontent")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width + (margin.left + w*0.25) + margin.right)
+    .attr("height", height + (margin.top + h*0.05) + margin.bottom)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + (margin.left + w*0.25) + "," + (margin.top + h*0.05) + ")");
     
 // Get the data
 d3.csv("data1.csv", function(error, data) {
@@ -134,6 +152,14 @@ d3.csv("data1.csv", function(error, data) {
   chart3.append("g")
     .attr("class", "y axis")
     .call(yAxis);
+
+  chart3.append("text")
+    .attr("x", (width / 2))             
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")  
+    .style("font-size", "16px") 
+    .style("font-weight", "bold")  
+    .text("Consultas por Habitante");
 
 });
 

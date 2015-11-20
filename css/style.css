@@ -1,4 +1,4 @@
-body { font: 12px Arial;}
+body { font: 12px Arial; padding: 0px;}
 
 .D3graph path { 
   stroke: steelblue;
@@ -12,6 +12,32 @@ body { font: 12px Arial;}
 	stroke: grey;
 	stroke-width: 1;
 	shape-rendering: crispEdges;
+}
+
+.graphstyle {
+height: 40%;
+width: 40%;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 5%;	
+}
+
+#chart-container {
+height: 100%;
+width: 70%;
+float: left;
+}
+
+#graph-container {
+height: 100%;
+width: 90%;
+margin-left: auto;
+margin-right: auto;
+display: block; 	
+}
+
+#globalcontainer {
+width: 100%;
 }
 
 div.tabs {
@@ -69,8 +95,8 @@ margin-top: 0;
 }
 
 #mapdiv {
-	width: 400px; 
-	height: 500px;
+	width: 30%; 
+	height: 100%;
 	float:left;
 	background-color:#FFFFFF; 
 	
