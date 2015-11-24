@@ -127,10 +127,18 @@ var chart3 = d3.select("explorecontent")
     .attr("transform", "translate(" + (margin.left + w*0.25) + "," + (margin.top + h*0.05) + ")");
     
 // Get the data
-d3.csv("data1.csv", function(error, data) {
+
+d3.json("data/dataset-sample.json", function(error, data) {
+  data = data.data;
   data.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.close = +d.close;
+    
+    if (d["Âmbito Geográfico"]==="NUTS 2013"){
+    console.log(d);
+    }
+    if (d["Âmbito Geográfico"]["2009 - Consultas por hab."]){
+       console.log("yey");
+    }
+    
   });
 
   // Scale the range of the data
