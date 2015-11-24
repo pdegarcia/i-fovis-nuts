@@ -2,8 +2,8 @@
 
 $("explorecontent").empty();
 
-var h = $("#graph-container").height();
-var w = $("#graph-container").width();
+var h = $(".graph-container").height();
+var w = $(".graph-container").width();
 
 // Set the dimensions of the canvas / graph
 var margin = {top: h*0.05, right: w*0.025, bottom: h*0.05, left: w*0.06},

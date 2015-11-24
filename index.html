@@ -24,6 +24,7 @@
 
 	<!-- map file should be included after ammap.js -->
 	<script src="js/map.js" type="text/javascript"></script>
+	<script src="js/mapCompare.js" type="text/javascript"></script>
 	<script src="js-library/ammap/maps/js/worldLow.js" type="text/javascript"></script>
 	<script src="js-library/ammap/maps/js/continentsLow.js" type="text/javascript"></script>
 
@@ -45,10 +46,29 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="explore_tab">
 				<div id="dropdown_container"></div>
-				<div id="globalcontainer">
-					<div id="mapdiv"></div>
-					<div id="chart-container">
-						<div id="graph-container"> 
+				<div class="globalcontainer">
+					<div id="info" class="info"></div>
+					<div class="map-container">
+						<div id="mapdiv" class="map"></div>
+						<div class="buttons_area">
+							<div class="button-container">
+								<button type="button" onclick="changeToNUTS1.call();">NUTS I</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="changeToNUTS2.call();">NUTS II</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="changeToNUTS3.call();">NUTS III</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="changeToCities.call();">Municípios</button>
+							</div>	
+							
+							
+						</div>
+					</div>	
+					<div class="chart-container">
+						<div class="graph-container"> 
 							<explorecontent class="D3graph"></explorecontent></div>
 					</div>
 				</div>	
@@ -56,7 +76,33 @@
 			<div class="tab-pane" id="compare_tab">
 				<h1>Comparar</h1>
 				<div id="dropdown_container"></div>
-				<comparecontent class="D3graph"></comparecontent>
+				<div class="globalcontainer">
+					<div id="C_info" class="info"></div>
+					<div class="map-container">
+						<div id="C_mapdiv" class="map"></div>
+						<div class="buttons_area">
+							<div class="button-container">
+								<button type="button" onclick="C_changeToNUTS1.call();">NUTS I</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="C_changeToNUTS2.call();">NUTS II</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="C_changeToNUTS3.call();">NUTS III</button>
+							</div>	
+							<div class="button-container">
+								<button type="button" onclick="C_changeToCities.call();">Municípios</button>
+							</div>	
+							
+							
+						</div>
+					</div>	
+					<div class="chart-container">
+						<div class="graph-container"> 
+							<comparecontent class="D3graph"></comparecontent>
+					</div>
+				</div>	
+				
 			</div>
 		</div>
 	</div>
