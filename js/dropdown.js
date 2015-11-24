@@ -58,5 +58,5 @@ return ("you have made a Pie for" + " " + selection.text())
 d3.select("#dropdown_container").on("change", changePie);           
 };
 
-d3.json("data/dataset-sample.json", checkIt);
+d3.json("data/dataset-sample-old.json", checkIt);
 })(d3);

@@ -128,15 +128,17 @@ var chart3 = d3.select("explorecontent")
     
 // Get the data
 
-d3.json("data/dataset-sample.json", function(error, data) {
-  data = data.data;
+d3.json("data/dataset.json", function(error, data) {
+  data = data.document.nuts;
   data.forEach(function(d) {
-    
-    if (d["Âmbito Geográfico"]==="NUTS 2013"){
+    if (d._id ==="Portugal"){
     console.log(d);
-    }
-    if (d["Âmbito Geográfico"]["2009 - Consultas por hab."]){
-       console.log("yey");
+      d.date = 2009, 2010, 2011, 2012;
+      d.a2009 = d.consultasPorHab.ano2009;
+      d.a2010 = d.consultasPorHab.ano2010;
+      console.log(d.a2009)
+      d.close = +d.a2010
+      d.date = 2009;
     }
     
   });
