@@ -47,6 +47,10 @@ var uniqueData = d3.nest()
     console.log("your selection is");
     console.dir(uniqueData[selectedIndex].values[0]);
     
+   // var elem = $("#info")[0];
+        // alert(elem);
+    //elem.innerHTML = "Selected Regions:<br />" + selection.text());
+    
     //making Pie 
 function makePie() {
 return ("you selected: " + " " + selection.text() + " - " + uniqueData[selectedIndex].values[0].ambito)
