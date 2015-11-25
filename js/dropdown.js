@@ -1,18 +1,17 @@
 !(function (d3) {
 
-
 function checkIt(data) {
-    data =data.data;
+    data = data.document.nuts;
     
     //var regexp = new RegExp(',');
-    var countriesByName = d3.nest()
+    var nutsByName = d3.nest()
         .key(function (d) {
           
-        return d.Territórios; 
+        return d._id; 
     })
         .entries(data);
 // creating dropdown    
-    var data = JSON.stringify(countriesByName)
+    var data = JSON.stringify(nutsByName)
     var data = JSON.parse(data);
 	var dropDown = d3.select("#dropdown_container")
                    .append("select")
@@ -50,7 +49,7 @@ var uniqueData = d3.nest()
     
     //making Pie 
 function makePie() {
-return ("you have made a Pie for" + " " + selection.text())
+return ("you selected: " + " " + selection.text() + " - " + uniqueData[selectedIndex].values[0].ambito)
 };
     alert(makePie());
 };   
@@ -58,5 +57,5 @@ return ("you have made a Pie for" + " " + selection.text())
 d3.select("#dropdown_container").on("change", changePie);           
 };
 
-d3.json("data/dataset-sample-old.json", checkIt);
+d3.json("data/dataset.json", checkIt);
 })(d3);
