@@ -25,8 +25,8 @@ var yAxis = d3.svg.axis().scale(y)
 var valueline = d3.svg.line()
   .x(function(d) { return x(d.date); })
   .y(function(d) { return y(d.close); });
-    
-// Adds the svg canvas 
+
+// Adds the svg canvas
 var chart1 = d3.select("comparecontent")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -34,8 +34,8 @@ var chart1 = d3.select("comparecontent")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-                
+//Play
+var isPlaying = false;
 
 // Get the data ------------------------------- our data ----------------------------------
 
@@ -44,17 +44,17 @@ var chart1 = d3.select("comparecontent")
 d3.json("data/dataset-sample.json", function(error,data) {
   dataset = data.data;
   //console.log(data);
-             
-  
+
+
   dataset.forEach(function(d) {
     //console.log(d)
     if (d.Territórios) {
       console.log(d.Territórios);
-      
+
     }
   })
   });
-  
+
 
 // Get the data
 d3.csv("data1.csv", function(error, data) {
@@ -84,5 +84,29 @@ d3.csv("data1.csv", function(error, data) {
     .call(yAxis);
 
 });
+
+// SLIDER
+
+var formatter = d3.format("d");
+var tickFormatter = function(d) {
+  return "Ano " + formatter(d);
+}
+
+var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
+d3.select('#timeline').call(slider);
+
+d3.select('#play')
+  .attr("title", "Play Animation")
+  .on("click", function(){
+    if(!isPlaying) {
+      isPlaying = true;
+      d3.select(this).classed("pause", true).attr("title", "Pause Animation");
+      //animate aqui
+    } else {
+      isPlaying = false;
+      d3.select(this).classed("pause", false).attr("title", "Play Animation");
+      //stop animate
+    }
+  });
 
 })(d3);

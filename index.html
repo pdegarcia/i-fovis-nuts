@@ -8,12 +8,14 @@
 	<!-- Includes for css styles -->
 	<link href="css/bootstrap-combined.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/d3.slider.css" rel="stylesheet">
 
 	<!-- Includes for bootstrap and jquery script -->
 	<script src="js-library/jquery-2.1.4.min.js"></script>
 	<script src="js-library/d3.min.js"></script>
 	<script src="js-library/bootstrap.min.js"></script>
-	
+	<script src="js-library/d3.slider.js"></script>
+
 	<script src="js/dropdown.js"></script>
 	<script src="js/layout.js"></script>
 
@@ -53,60 +55,59 @@
 						<div class="buttons_area">
 							<div class="button-container">
 								<button type="button" onclick="changeToNUTS1.call();">NUTS I</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="changeToNUTS2.call();">NUTS II</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="changeToNUTS3.call();">NUTS III</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="changeToCities.call();">Municípios</button>
-							</div>	
-							
-							
+							</div>
 						</div>
-					</div>	
+					</div>
 					<div class="chart-container">
-						<div class="graph-container"> 
+						<div class="graph-container">
 							<explorecontent class="D3graph"></explorecontent></div>
 					</div>
-				</div>	
+				</div>
 			</div>
 			<div class="tab-pane" id="compare_tab">
-				<h1>Comparar</h1>
+				<h1>Influência do Período de Recessão 2009 - 2013</h1>
+				<h2>Ganho por Nível de Escolaridade/Poder de Compra/Consultas por Habitante</h2>
 				<div id="dropdown_container"></div>
 				<div class="globalcontainer">
-					<div id="C_info" class="info"></div>
+					<!-- <div id="C_info" class="info"></div> -->
 					<div class="map-container">
 						<div id="C_mapdiv" class="map"></div>
 						<div class="buttons_area">
 							<div class="button-container">
 								<button type="button" onclick="C_changeToNUTS1.call();">NUTS I</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="C_changeToNUTS2.call();">NUTS II</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="C_changeToNUTS3.call();">NUTS III</button>
-							</div>	
+							</div>
 							<div class="button-container">
 								<button type="button" onclick="C_changeToCities.call();">Municípios</button>
-							</div>	
-							
-							
+							</div>
 						</div>
-					</div>	
-					<div class="chart-container">
-						<div class="graph-container"> 
-							<comparecontent class="D3graph"></comparecontent>
 					</div>
-				</div>	
-				
+					<div class="chart-container">
+						<div class="graph-container">
+							<comparecontent class="D3graph"></comparecontent>
+							<div id="play" title="Play Animation"></div>
+							<div id="timeline"></div>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script>
 		$.ajaxSetup({
@@ -114,7 +115,7 @@
 				// Used when debugging
 				cache : false
 			});
-			
+
 			$.getScript("js/explore.js");
 			$(".exploretab").click(function() {
 				$.getScript("js/explore.js");
