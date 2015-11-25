@@ -86,6 +86,7 @@ d3.csv("data1.csv", function(error, data) {
   data.forEach(function(d) {
     d.date = parseDate(d.date);
     d.close = +d.close;
+   // console.log(d)
   });
 
   // Scale the range of the data
@@ -128,29 +129,47 @@ var chart3 = d3.select("explorecontent")
     
 // Get the data
 
-d3.json("data/dataset.json", function(error, data) {
+d3.json("data/dataset-sample.json", function(error, data) {
   data = data.document.nuts;
   data.forEach(function(d) {
-    if (d._id ==="Portugal"){
-    console.log(d);
-      d.date = 2009, 2010, 2011, 2012;
-      d.a2009 = d.consultasPorHab.ano2009;
-      d.a2010 = d.consultasPorHab.ano2010;
-      console.log(d.a2009)
-      d.close = +d.a2010
-      d.date = 2009;
-    }
-    
+    //if (d._id ==="Portugal"){
+      d.anos = [[2009,d.consultasPorHab.ano2009], [2010,d.consultasPorHab.ano2010], [2011,d.consultasPorHab.ano2011], [2012,d.consultasPorHab.ano2012]]
+      d.valores = [d.consultasPorHab.ano2009, d.consultasPorHab.ano2010, d.consultasPorHab.ano2011, d.consultasPorHab.ano2012]
+    //console.log(d);
+      d.date = 2012;
+      
+  // }
+
   });
 
   // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  x.domain([2009, d3.max(data, function(d) { return d.date; })]);
   y.domain([0, d3.max(data, function(d) { return d.close; })]);
 
+// Define the line
+var stringFilter = "Portugal"
+
+var line = d3.svg.line() 
+ 			// assign the X function to plot our line as we wish 
+ 			.x(function(d) {  
+         console.log(d);
+ 				// verbose logging to show what's actually being done 
+ 				console.log('Plotting X value for data point: ' + d[0] + ' using index: ' + ' to be at: ' + ' using our xScale.'); 
+ 				// return the X coordinate where we want to plot this datapoint 
+         
+ 				return x(d[0]);  
+ 			}) 
+ 			.y(function(d) {  
+ 				// verbose logging to show what's actually being done 
+ 				console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + " using our yScale."); 
+ 				// return the Y coordinate where we want to plot this datapoint 
+ 				return y(d[1]);  
+ 			}) 
+console.log(data)
   // Add the valueline path.
   chart3.append("path")
     .attr("class", "line")
-    .attr("d", valueline(data));
+    .attr("d", line(data[2].anos));
 
   // Add the X Axis
   chart3.append("g")
@@ -172,6 +191,5 @@ d3.json("data/dataset.json", function(error, data) {
     .text("Consultas por Habitante");
 
 });
-
 
 })(d3);
