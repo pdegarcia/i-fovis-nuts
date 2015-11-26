@@ -1,7 +1,7 @@
 
 function graphBar(){
-  
-  
+
+
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
 
@@ -25,7 +25,7 @@ var yAxis = d3.svg.axis().scale(y)
 var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
   .y(function(d) { console.log(y(d[1])+height + " ::::"); return y(d[1])+height; });
-    
+
 // Adds the svg canvas - PRIMEIRO GRAFICO - GANHO POR NIVEL DE ESCOLARIDADE
 var chart = d3.select("explorecontent")
   .append("svg")
@@ -50,9 +50,9 @@ d3.json("data/dataset-sample.json", function(error, data) {
   chart.append("path")
     .attr("class", "line")
     .attr("d", valueline(data[0].escolaridadeTotal));
-    
-    
-  //bars 
+
+
+  //bars
   var barWidth = 40;
 
   var bar = chart.selectAll("g")
@@ -62,7 +62,7 @@ d3.json("data/dataset-sample.json", function(error, data) {
 
   bar.append("rect")
       .attr("y", function(d) { return 0; })
-      .attr("fill", "purple")
+      .attr("fill", "steelblue")
       .attr("height", function(d) { return d[1]-700; })
       .attr("width", barWidth - 1);
 
@@ -83,11 +83,11 @@ d3.json("data/dataset-sample.json", function(error, data) {
     .call(yAxis);
 
   chart.append("text")
-    .attr("x", (width / 2))             
+    .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
-    .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
-    .style("font-weight", "bold")  
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
     .text("Ganho Total - Todas as Escolaridades");
 
 })}
@@ -156,13 +156,13 @@ d3.json("data/dataset-sample.json", function(error, data) {
     .call(yAxis);
 
   chart1.append("text")
-    .attr("x", (width / 2))             
+    .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
-    .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
-    .style("font-weight", "bold")  
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
     .text("Ganho Total - Todas as Escolaridades");
-    
+
     });*/
 
 
@@ -174,7 +174,7 @@ var chart2 = d3.select("explorecontent")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
 // Get the data
 d3.json("data/dataset-sample.json", function(error, data) {
   data = data.document.nuts;
@@ -184,26 +184,26 @@ d3.json("data/dataset-sample.json", function(error, data) {
   });
 
   // Scale the range of the data
-  x.domain([2009, d3.max(data[4].poderCompra, function(d) { //console.log(d); 
+  x.domain([2009, d3.max(data[4].poderCompra, function(d) { //console.log(d);
                                                     return d[0]; })]);
-  y.domain([0, d3.max(data[4].poderCompra, function(d) { //console.log(d); 
+  y.domain([0, d3.max(data[4].poderCompra, function(d) { //console.log(d);
                                                     return d[1]; })]);
 
-var line1 = d3.svg.line() 
- 			// assign the X function to plot our line as we wish 
- 			.x(function(d) {  
+var line1 = d3.svg.line()
+ 			// assign the X function to plot our line as we wish
+ 			.x(function(d) {
         // console.log(d);
- 				// verbose logging to show what's actually being done 
- 				// console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.'); 
- 				// return the X coordinate where we want to plot this datapoint 
- 				return x(d[0]);  
- 			}) 
- 			.y(function(d) {  
- 				// verbose logging to show what's actually being done 
- 				// console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale."); 
- 				// return the Y coordinate where we want to plot this datapoint 
- 				return y(d[1]);  
- 			}) 
+ 				// verbose logging to show what's actually being done
+ 				// console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.');
+ 				// return the X coordinate where we want to plot this datapoint
+ 				return x(d[0]);
+ 			})
+ 			.y(function(d) {
+ 				// verbose logging to show what's actually being done
+ 				// console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale.");
+ 				// return the Y coordinate where we want to plot this datapoint
+ 				return y(d[1]);
+ 			})
 
   // Add the valueline path.
   chart2.append("path")
@@ -222,11 +222,11 @@ var line1 = d3.svg.line()
     .call(yAxis);
 
   chart2.append("text")
-    .attr("x", (width / 2))             
+    .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
-    .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
-    .style("font-weight", "bold")  
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
     .text("Poder de Compra per capita");
 
 });
@@ -238,7 +238,7 @@ var chart3 = d3.select("explorecontent")
     .attr("height", height + (margin.top + h*0.05) + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + (margin.left + w*0.25) + "," + (margin.top + h*0.05) + ")");
-    
+
 // Get the data
 
 d3.json("data/dataset-sample.json", function(error, data) {
@@ -250,26 +250,26 @@ d3.json("data/dataset-sample.json", function(error, data) {
 
 
   // Scale the range of the data
-  x.domain([2009, d3.max(data[4].consultas, function(d) { //console.log(d[0]); 
+  x.domain([2009, d3.max(data[4].consultas, function(d) { //console.log(d[0]);
                                           return d[0]; })]);
-  y.domain([0, d3.max(data[4].consultas, function(d) { //console.log(d[1]); 
+  y.domain([0, d3.max(data[4].consultas, function(d) { //console.log(d[1]);
                                           return d[1]; })]);
 
-var line = d3.svg.line() 
- 			// assign the X function to plot our line as we wish 
- 			.x(function(d) {  
+var line = d3.svg.line()
+ 			// assign the X function to plot our line as we wish
+ 			.x(function(d) {
         // console.log(d);
- 				// verbose logging to show what's actually being done 
- 				// console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.'); 
- 				// return the X coordinate where we want to plot this datapoint 
- 				return x(d[0]);  
- 			}) 
- 			.y(function(d) {  
- 				// verbose logging to show what's actually being done 
- 				// console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale."); 
- 				// return the Y coordinate where we want to plot this datapoint 
- 				return y(d[1]);  
- 			}) 
+ 				// verbose logging to show what's actually being done
+ 				// console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.');
+ 				// return the X coordinate where we want to plot this datapoint
+ 				return x(d[0]);
+ 			})
+ 			.y(function(d) {
+ 				// verbose logging to show what's actually being done
+ 				// console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale.");
+ 				// return the Y coordinate where we want to plot this datapoint
+ 				return y(d[1]);
+ 			})
   // Add the valueline path.
   chart3.append("path")
     .attr("class", "line")
@@ -285,14 +285,14 @@ var line = d3.svg.line()
   chart3.append("g")
     .attr("class", "y axis")
     .call(yAxis);
-  
+
   // Add the title
   chart3.append("text")
-    .attr("x", (width / 2))             
+    .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
-    .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
-    .style("font-weight", "bold")  
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
     .text("Consultas por Habitante");
 
 });
