@@ -34,6 +34,30 @@ var chart1 = d3.select("comparecontent")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// SLIDER
+
+var formatter = d3.format("d");
+var tickFormatter = function(d) {
+  return "Ano " + formatter(d);
+}
+
+var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
+d3.select('#timeline').call(slider);
+
+d3.select('#play')
+  .attr("title", "Play Animation")
+  .on("click", function(){
+    if(!isPlaying) {
+      isPlaying = true;
+      d3.select(this).classed("pause", true).attr("title", "Pause Animation");
+      //animate aqui
+    } else {
+      isPlaying = false;
+      d3.select(this).classed("pause", false).attr("title", "Play Animation");
+      //stop animate
+    }
+  });
+
 //Play
 var isPlaying = false;
 
@@ -84,29 +108,5 @@ d3.csv("data1.csv", function(error, data) {
     .call(yAxis);
 
 });
-
-// SLIDER
-
-var formatter = d3.format("d");
-var tickFormatter = function(d) {
-  return "Ano " + formatter(d);
-}
-
-var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
-d3.select('#timeline').call(slider);
-
-d3.select('#play')
-  .attr("title", "Play Animation")
-  .on("click", function(){
-    if(!isPlaying) {
-      isPlaying = true;
-      d3.select(this).classed("pause", true).attr("title", "Pause Animation");
-      //animate aqui
-    } else {
-      isPlaying = false;
-      d3.select(this).classed("pause", false).attr("title", "Play Animation");
-      //stop animate
-    }
-  });
 
 })(d3);
