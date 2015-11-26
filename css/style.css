@@ -41,14 +41,16 @@ h2 {
 }
 
 .exploregraph-container {
-	height: 50%;
-	width: 50%;
-	float: left;
+	height: 60%;
+	width: 70%;
+    float: left;
 }
 
 .timeline-container {
-	height: 10%;
-	width: 70%;
+	height: 50px;
+	width: 80%;
+	float: left;
+	margin-left: 2%;
 }
 
 .graph-container {
@@ -125,7 +127,8 @@ div.tabs div h2 {
 .tags_area {
 	width: 40%;
 	height: 50%;
-	float: right;
+	margin-left: -10%;
+	float: left;
 }
 
 .buttons_area {
@@ -192,7 +195,8 @@ div.tabs div h2 {
 	border-top: 13px solid transparent;
 	border-left: 25px solid red;
 	border-bottom: 13px solid transparent;
-  cursor: pointer;
+	margin-top: 15px;
+    cursor: pointer;
 	float: left;
 }
 
@@ -205,8 +209,8 @@ div.tabs div h2 {
 }
 
 #timeline {
-	width: 100%;
-	margin-left: 30px;
+	width: 50%;
+	
 	float: left;
 }
 .chart rect {

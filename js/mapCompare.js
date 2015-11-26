@@ -11,12 +11,56 @@ var C_NUTS3 = {
 	map : "continentsLow",
 	getAreasFromMap : true,
 	zoomLevel: 3,
+	areas: [ {
+		id: "PT-13",
+		groupId: "Lisboa"
+	},{
+		id: "PT-15",
+		groupId: "Lisboa"	
+	},
+	{
+		id: "PT-16",
+		groupId: "Beiras e Serra da Estrela"	
+	},
+	{
+		id: "PT-17",
+		groupId: "Beiras e Serra da Estrela"	
+	},
+	{
+		id: "PT-28",
+		groupId: "Beiras e Serra da Estrela"	
+	},
+	{
+		id: "PT-7",
+		groupId: "Beira Baixa"	
+	},
+	{
+		id: "PT-21",
+		groupId: "Beira Baixa"	
+	},
+	{
+		id: "PT-5",
+		groupId: "Região de Coimbra"	
+	},
+	{
+		id: "PT-11",
+		groupId: "Região de Coimbra"	
+	},
+	
+	],
 };
 
 var C_NUTS2 = {
 	map : "portugalRegionsLow",
 	getAreasFromMap : true,
 	zoomLevel: 2,
+	areas: [ {
+		id: "PT-L1",
+		groupId: "Lisboa"
+	},{
+		id: "PT-L2",
+		groupId: "Lisboa"	
+	}],
 };
 
 var C_NUTS1 = {
@@ -124,7 +168,7 @@ C_map.addListener("homeButtonClicked", C_handleGoHome);
 C_map.addListener('clickMapObject', function (event) {
         //C_handleMapObjectClick();
         // deselect the area by assigning all of the dataProvider as selected object
-        C_map.selectedObject = C_map.dataProvider;
+        //C_map.selectedObject = C_map.dataProvider;
         
         // toggle showAsSelected
         event.mapObject.showAsSelected = !event.mapObject.showAsSelected;

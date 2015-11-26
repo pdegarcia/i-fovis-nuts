@@ -1,11 +1,14 @@
 !(function (d3) {
 
 $("comparecontent").empty();
+var h = $(".exploregraph-container").height(); //298
+var w = $(".exploregraph-container").width();  //504
+
 
 // Set the dimensions of the canvas / graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50},
-  width = 800 - margin.left - margin.right,
-  height = 420 - margin.top - margin.bottom;
+  width = w - margin.left - margin.right,
+  height = h - margin.top - margin.bottom;
 
 // Parse the date / time
 var parseDate = d3.time.format("%d-%b-%y").parse;
