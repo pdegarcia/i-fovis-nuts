@@ -42,14 +42,13 @@ h2 {
 
 .exploregraph-container {
 	height: 50%;
-	width: 70%;
-	margin-left: 200px;
+	width: 50%;
+	float: left;
 }
 
 .timeline-container {
 	height: 10%;
 	width: 70%;
-	margin-left: 200px;
 }
 
 .graph-container {
@@ -124,8 +123,9 @@ div.tabs div h2 {
 }
 
 .tags_area {
-	width: 10%;
-	height: 100%;
+	width: 40%;
+	height: 50%;
+	float: right;
 }
 
 .buttons_area {
@@ -181,6 +181,11 @@ div.tabs div h2 {
   	background-color: #fff;
 }
 
+.row {
+	width: 100%;
+	height: 20%;
+	margin-left: 200px;
+}
 #play {
 	width: 0px;
 	height: 0px;
