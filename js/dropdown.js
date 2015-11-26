@@ -6,8 +6,8 @@ function checkIt(data) {
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
-          
-        return d._id; 
+          var nome = d.ambito + ":" + d._id 
+        return nome; 
     })
         .entries(data);
 // creating dropdown    
@@ -53,9 +53,11 @@ var uniqueData = d3.nest()
     
     //making Pie 
 function makePie() {
-return ("you selected: " + " " + selection.text() + " - " + uniqueData[selectedIndex].values[0].ambito)
+return ("you selected: " + " " + selection.text())
 };
-    alert(makePie());
+    var elem = $("#info")[0];
+    elem.innerHTML = "Selected Regions:<br />" + selection.text();
+    //alert(makePie());
 };   
 
 d3.select("#dropdown_container").on("change", changePie);           
