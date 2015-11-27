@@ -38,7 +38,7 @@ var chart1 = d3.select("comparecontent")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // SLIDER
-
+$("#timeline").empty();
 var formatter = d3.format("d");
 var tickFormatter = function(d) {
   return "Ano " + formatter(d);
