@@ -47,9 +47,11 @@ var uniqueData = d3.nest()
 
     //making Pie
 function makePie() {
-return ("you selected: " + " " + selection.text() + " - " + uniqueData[selectedIndex].values[0].ambito)
+return ("you selected: " + " " + selection.text())
 };
-    alert(makePie());
+    var elem = $("#selectedNUTS")[0];
+    elem.innerHTML = selection.text();
+    //alert(makePie());
 };
 
 d3.select("#searchbox_container").on("change", changePie);           

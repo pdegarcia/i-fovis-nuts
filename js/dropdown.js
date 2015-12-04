@@ -6,7 +6,7 @@ function checkIt(data) {
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
-          var nome = d.ambito + ":" + d._id 
+          var nome = d._id //d.ambito + ":" + d._id 
         return nome; 
     })
         .entries(data);
@@ -47,16 +47,12 @@ var uniqueData = d3.nest()
     console.log("your selection is");
     console.dir(uniqueData[selectedIndex].values[0]);
     
-   // var elem = $("#info")[0];
-        // alert(elem);
-    //elem.innerHTML = "Selected Regions:<br />" + selection.text());
-    
     //making Pie 
 function makePie() {
 return ("you selected: " + " " + selection.text())
 };
-    var elem = $("#info")[0];
-    elem.innerHTML = "Selected Regions:<br />" + selection.text();
+    var elem = $("#selectedNUTS")[0];
+    elem.innerHTML = selection.text();
     //alert(makePie());
 };   
 
