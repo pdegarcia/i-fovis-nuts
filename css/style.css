@@ -118,6 +118,34 @@ div.tabs div h2 {
 	margin-top: 0;
 }
 
+#dropdown_container {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+	margin-left: 120px;
+	margin-bottom: 10px;
+}
+
+#searchbox_container {
+	width: 100%;
+	float: left;
+}
+
+#form-areas {
+	height: 80%;
+	width: 25%;
+	float: left;
+	margin-top: 10px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+}
+
+#result-container {
+	height: 20%;
+	float: left;
+	margin-left: 30px;
+}
+
 .map-container {
 	width: 30%;
 	height: 100%;
@@ -210,10 +238,27 @@ div.tabs div h2 {
 
 #timeline {
 	width: 50%;
-	
+
 	float: left;
 }
 .chart rect {
   fill: steelblue;
 }
 
+/* SEARCHBOX CODE */
+
+.project-jquerytypeahead.page-demo .typeahead-list li a {
+    position: relative;
+}
+
+.project-jquerytypeahead.page-demo .result-container {
+    position: absolute;
+    color: #777;
+    top: -1.5em;
+}
+
+.project-jquerytypeahead.page-demo .typeahead-search li a .flag-chart {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+}
