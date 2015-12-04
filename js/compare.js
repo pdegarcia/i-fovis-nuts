@@ -64,6 +64,10 @@ d3.select('#play')
 //Play
 var isPlaying = false;
 
+function animate(){
+  
+}
+
 // Get the data ------------------------------- our data ----------------------------------
 
 
