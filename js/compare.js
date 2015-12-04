@@ -39,11 +39,18 @@ var chart1 = d3.select("comparecontent")
 
 // Get the data ------------------------------- our data ----------------------------------
 
+var elem = $("#selectedNUTS").text();
+console.log(elem);
+
 d3.json("data/dataset-sample.json", function(error, data) {
   data1 = data.document.nuts;
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       //console.log(d.compraPerCapita);
+      if(d._id==elem){
+        console.log("looool");
+      }
+      console.log(d._id===elem)
   });
   
 
@@ -205,6 +212,10 @@ d3.select('#play')
 
 //Play
 var isPlaying = false;
+
+function animate(){
+  
+}
 
 // Get the data ------------------------------- our data ----------------------------------
 

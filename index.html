@@ -9,15 +9,20 @@
 	<link href="css/bootstrap-combined.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/d3.slider.css" rel="stylesheet">
+	<link href="css/jquery.typeahead.css" rel="stylesheet">
 
 	<!-- Includes for bootstrap and jquery script -->
 	<script src="js-library/jquery-2.1.4.min.js"></script>
 	<script src="js-library/d3.min.js"></script>
 	<script src="js-library/bootstrap.min.js"></script>
 
+
 	<!-- <script src="js/dropdown.js"></script> -->
 	<script src="js-library/d3.slider.js"></script>
 	<script src="js/layout.js"></script>
+
+	<!-- Includes for searchbox -->
+	<script src="js-library/jquery.typeahead.js"></script>
 
 	<!-- Includes for the map -->
 
@@ -77,7 +82,23 @@
 			<div class="tab-pane" id="compare_tab">
 				<h1>Influência do Período de Recessão 2009 - 2013</h1>
 			<!--	<h2>Ganho por Nível de Escolaridade/Poder de Compra/Consultas por Habitante</h2> -->
-				<div id="searchbox_container"></div>
+				<div id="searchbox_container">
+					<!-- <var id="result-container" class="result-container"></var> -->
+					<form id="form-areas" name="form-areas">
+						<div class="typeahead-container">
+								<div class="typeahead-field">
+										<span class="typeahead-query">
+												<input id="areas-query" name="areas[query]" type="search" autofocus autocomplete="off">
+										</span>
+										<span class="typeahead-button">
+												<button type="submit">
+														<i class="typeahead-search-icon"></i>
+												</button>
+										</span>
+								</div>
+						</div>
+					</form>
+				</div>
 				<div class="globalcontainer">
 					<!-- <div id="C_info" class="info"></div> -->
 					<div class="map-container">
