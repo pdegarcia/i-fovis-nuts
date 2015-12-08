@@ -1,0 +1,19 @@
+{ "document": {
+    "categories": [
+        { "_id": "ganhoTotal",
+          "_name": "Ganho Total" },
+        { "_id": "inferiorBasico",
+          "_name": "Ganho para Escolaridade Inferior ao Básico" },
+        { "_id": "igualBasico",
+          "_name": "Ganho para Escolaridade Equivalente ao Básico" },
+        { "_id": "igualSecundario",
+          "_name": "Ganho para Escolaridade Equivalente ao Secundário" },
+        { "_id": "igualSuperior",
+          "_name": "Ganho para Escolaridade Equivalente ao Superior" },
+        { "_id": "compraPerCapita",
+          "_name": "Poder de Compra per capita" },
+        { "_id": "consultasPorHab",
+          "_name": "Consultas por Habitante" }
+    ]
+  }
+}

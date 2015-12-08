@@ -24,7 +24,7 @@ var yAxis = d3.svg.axis().scale(y)
 // Define the line
 var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
-  .y(function(d) { //console.log(y(d[1])+height + " ::::"); 
+  .y(function(d) { //console.log(y(d[1])+height + " ::::");
   return y(d[1])+height; });
 
 // Adds the svg canvas - PRIMEIRO GRAFICO - GANHO POR NIVEL DE ESCOLARIDADE
