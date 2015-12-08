@@ -1,5 +1,5 @@
 function graphGanho(){
-  
+
 
   var h = $(".exploregraph-container").height(); //298
 var w = $(".exploregraph-container").width();  //504
@@ -52,7 +52,7 @@ d3.json("data/dataset-sample.json", function(error, data) {
       }
       console.log(d._id===elem)
   });
-  
+
 
 
 // Get the data
@@ -117,6 +117,48 @@ d3.csv("data1.csv", function(error, data) {
     .call(yAxis);
 
 })});
+
+  d3.selectAll("#ganhoT")
+    .on("click", function () {
+      console.log("Ganho Total Pressed");
+      //para cada NUT seleccionado, apresentar Ganho Total
+    });
+
+  d3.selectAll("#ganhoIB")
+    .on("click", function () {
+      console.log("Ganho Inferior ao Básico Pressed");
+      //para cada NUT seleccionado, apresentar Ganho IB
+    });
+
+  d3.selectAll("#ganhoEB")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Básico Pressed");
+      //para cada NUT seleccionado, apresentar Ganho EB
+    });
+
+  d3.selectAll("#ganhoESec")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Secundário Pressed");
+      //para cada NUT seleccionado, apresentar Ganho ESec
+    });
+
+  d3.selectAll("#ganhoESup")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Superior Pressed");
+      //para cada NUT seleccionado, apresentar Ganho ESup
+    });
+
+  d3.selectAll("#poder")
+    .on("click", function () {
+      console.log("Poder de Compra per capita Pressed");
+      //para cada NUT seleccionado, apresentar Poder de compra
+    });
+
+  d3.selectAll("#consultas")
+    .on("click", function () {
+      console.log("Consultas Pressed");
+      //para cada NUT seleccionado, apresentar Consultas
+    });
 };
 
 function drawTimeLine(){
@@ -146,11 +188,11 @@ d3.select('#play')
 
 //Play
 var isPlaying = false;
-  
+
 };
 
 function graphGanho1(){
-  
+
   var h = $(".exploregraph-container").height(); //298
 var w = $(".exploregraph-container").width();  //504
 
@@ -214,13 +256,10 @@ d3.select('#play')
 var isPlaying = false;
 
 function animate(){
-  
+
 }
 
 // Get the data ------------------------------- our data ----------------------------------
-
-
-
 d3.json("data/dataset-sample.json", function(error,data) {
   dataset = data.data;
   //console.log(data);
@@ -264,9 +303,8 @@ d3.csv("data1.csv", function(error, data) {
     .call(yAxis);
 
 })
- 
-}
 
+}
 
 !(function (d3) {
 
