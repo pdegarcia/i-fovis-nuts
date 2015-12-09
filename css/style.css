@@ -4,13 +4,21 @@ body {
 }
 
 h1 {
+	font: Arial;
 	text-align: center;
 	font-size: 30px;
 }
 
 h2 {
+	font: Arial;
 	text-align: center;
 	font-size: 15px;
+	margin-top: -1%;
+	margin-bottom: -2%;
+}
+
+#title_vars {
+	margin-left: 25%;
 }
 
 .D3graph path {
@@ -48,9 +56,10 @@ h2 {
 
 .timeline-container {
 	height: 50px;
-	width: 80%;
+	width: 75%;
 	float: left;
-	margin-left: 2%;
+	margin-top: 5%;
+	/*margin-left: 2%;*/
 }
 
 .graph-container {
@@ -189,7 +198,7 @@ div.tabs div h2 {
 }
 
 .info {
-	font-family: Verdana;
+	font-family: Arial;
 	font-size: 12px;
 	position: absolute;
 	top: 50%;
@@ -206,7 +215,7 @@ div.tabs div h2 {
 }
 
 .selectedNUTS {
-	font-family: Verdana;
+	font-family: Arial;
 	font-size: 12px;
 	position: absolute;
 	top: 50;
@@ -223,7 +232,7 @@ div.tabs div h2 {
 }
 
 .selectedCat {
-	font-family: Verdana;
+	font-family: Arial;
 	font-size: 12px;
 	position: absolute;
 	top: 50;
@@ -260,7 +269,7 @@ div.tabs div h2 {
 	text-shadow: rgba(0,0,0,.4) 0 1px 0;
 	color: white;
 	font-size: 12px;
-	font-family: Verdana;
+	font-family: Arial;
 	text-decoration: none;
 	vertical-align: middle;
 }
@@ -280,12 +289,25 @@ div.tabs div h2 {
 	height: 20%;
 	margin-left: 150px;
 }
+
+#poder {
+	width: 200%;
+	margin-top: 30%;
+}
+
+#ganhoT {
+	width: 200%;
+}
+
+#consultas {
+	width: 200%;
+}
+
 #play {
 	width: 53px;
   height: 53px;
   background-image: url(../images/play.png);
   border-radius: 5px;
-  margin-left: 20px;
   cursor: pointer;
 	float: left;
 }
@@ -299,8 +321,7 @@ div.tabs div h2 {
 }
 
 #timeline {
-	width: 50%;
-
+	width: 40%;
 	float: left;
 }
 .chart rect {

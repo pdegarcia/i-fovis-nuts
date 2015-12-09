@@ -47,6 +47,7 @@ d3.json("data/dataset-sample.json", function(error, data) {
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       //console.log(d.compraPerCapita);
+
       if(d._id==elem){
         console.log("looool");
       }
@@ -118,16 +119,19 @@ d3.csv("data1.csv", function(error, data) {
 
 })});
 
+  /* HANDLERS BOTOES */
   d3.selectAll("#ganhoT")
     .on("click", function () {
       console.log("Ganho Total Pressed");
       //para cada NUT seleccionado, apresentar Ganho Total
+      //No caso do total, só apresenta uma bola
     });
 
   d3.selectAll("#ganhoIB")
     .on("click", function () {
       console.log("Ganho Inferior ao Básico Pressed");
       //para cada NUT seleccionado, apresentar Ganho IB
+      //No caso do ganho IB, EB, ESec e ESup, aparecem em bolas ordenadas no eixo do Y
     });
 
   d3.selectAll("#ganhoEB")
