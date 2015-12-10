@@ -1,1 +1,5 @@
-[{"articles": [[2008, 1], [2009, 1], [2010, 1], [2012, 1], [2013, 1]], "total": 5, "name": "Total"}, {"articles": [[2010, 3], [2013, 1]], "total": 4, "name": "< Básico"}, {"articles": [[2010, 1], [2004, 1]], "total": 2, "name": "=Básico"}, {"articles": [[2011, 1], [2012, 1]], "total": 2, "name": "Secundário"}, {"articles": [[2011, 1], [2013, 1]], "total": 2, "name": "Superior"}]
+[{"articles": [[2008, 1], [2009, 1], [2010, 1], [2012, 1], [2013, 1]], "total": 5, "name": "Total"}, 
+{"articles": [[2010, 3], [2013, 1]], "total": 4, "name": "< Básico"}, 
+{"articles": [[2010, 1], [2004, 1]], "total": 2, "name": "=Básico"}, 
+{"articles": [[2011, 1], [2012, 1]], "total": 2, "name": "Secundário"}, 
+{"articles": [[2011, 1], [2013, 1]], "total": 2, "name": "Superior"}]
