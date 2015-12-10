@@ -327,7 +327,8 @@ d3.json("data/journals_tacs.json", function(data) {
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([0, d3.max(data1[j].escolaridadeTotal, function(d) { return d[1]; })])
+			.domain([700, d3.max(data1[j].escolaridadeTotal, function(d) { console.log(d);
+                                                                   return d[1]; })])
 			.range([2, 15]);
 
 		circles
