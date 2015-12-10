@@ -225,8 +225,9 @@ function animate(){
     var aux;
 
     d3.select("#timeline .dragger")
+      .transition()
+      .ease("linear")
       .attr("transform", "translate(" + currentFrame + ")" )
-      .transition().ease("linear");
     slider.value(currentFrame)
 
     drawYear(currentFrame);

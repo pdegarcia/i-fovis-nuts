@@ -17,6 +17,20 @@ h2 {
 	margin-bottom: -2%;
 }
 
+#intro {
+	width: 70%;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: center;
+	margin-top: 2%;
+	margin-left: 15%;
+}
+
+#vars {
+	font-size: 16px;
+	color: #999;
+}
+
 #title_vars {
 	margin-left: 25%;
 }
@@ -258,7 +272,7 @@ div.tabs div h2 {
 	width: 90%;
 	cursor: pointer;
 	transition: .1s;
-	background: #629ec7;
+	background: #2171b5;
 	padding: 8px;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -280,8 +294,8 @@ div.tabs div h2 {
    color: #ffffff;
    }
 .button-container button:active {
-   border-top-color: #1b435e;
-   background: #1b435e;
+   border-top-color: #6baed6;
+   background: #6baed6;
    }
 
 .row {
@@ -325,7 +339,7 @@ div.tabs div h2 {
 	float: left;
 }
 .chart rect {
-  fill: steelblue;
+  fill: #2171b5;
 }
 
 /* SEARCHBOX CODE */
@@ -336,7 +350,7 @@ div.tabs div h2 {
 
 .project-jquerytypeahead.page-demo .result-container {
     position: absolute;
-    color: #777;
+    color: #6baed6;
     top: -1.5em;
 }
 
