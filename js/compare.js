@@ -170,11 +170,14 @@ function drawTimeLine(){
 $("#timeline").empty();
 var formatter = d3.format("d");
 var tickFormatter = function(d) {
-  return "Ano " + formatter(d);
+  return formatter(d);
 }
 
 var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
 d3.select('#timeline').call(slider);
+
+d3.select("#timeline .dragger")
+  .on("click", function (d) {drawYear(d)});
 
 d3.select('#play')
   .attr("title", "Play Animation")
@@ -182,18 +185,66 @@ d3.select('#play')
     if(!isPlaying) {
       isPlaying = true;
       d3.select(this).classed("pause", true).attr("title", "Pause Animation");
-      //animate aqui
+      animate();
     } else {
       isPlaying = false;
       d3.select(this).classed("pause", false).attr("title", "Play Animation");
-      //stop animate
+      clearInterval( interval );
     }
   });
 
 //Play
-var isPlaying = false;
+var isPlaying = false,
+    interval,
+    currentFrame = 0,
+    frameLength = 500;
 
+function drawYear(year) {
+  var result = Math.floor(year);
+  //console.log(result);
+  if(year >= 0 && year < 153 || year >= 2009 && year < 2010){
+    console.log("Ano 2009!");
+    //dump dados ano 2009, para categorias e NUTs seleccionados
+  } else if (year >= 153 && year < 306 || year >= 2010 && year < 2011) {
+    console.log("Ano 2010!");
+    //dump dados ano 2010, para categorias e NUTs seleccionados
+  } else if (year >= 306 && year < 459 || year >= 2011 && year < 2012) {
+    console.log("Ano 2011!");
+    //dump dados ano 2011, para categorias e NUTs seleccionados
+  } else if (year >= 459 && year < 612 || year >= 2012 && year < 2013) {
+    console.log("Ano 2012!");
+    //dump dados ano 2012, para categorias e NUTs seleccionados
+  } else if (year == 612 || year == 2013) {
+    console.log("Ano 2013!");
+    //dump dados ano 2013, para categorias e NUTs seleccionados
+  }
 };
+
+function animate(){
+  interval = setInterval( function(){
+    var aux;
+
+    d3.select("#timeline .dragger")
+      .attr("transform", "translate(" + currentFrame + ")" )
+      .transition().ease("linear");
+    slider.value(currentFrame)
+
+    drawYear(currentFrame);
+    currentFrame += 153,75;
+
+    if ( currentFrame == 765 ){
+      console.log("entrei");
+      isPlaying = false;
+      d3.select("#play").classed("pause",false).attr("title","Play animation");
+      clearInterval( interval );
+      currentFrame = 0
+      return;
+    }
+
+  },frameLength);
+};
+
+}
 
 function graphGanho1(){
 
