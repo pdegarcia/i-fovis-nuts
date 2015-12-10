@@ -248,125 +248,123 @@ function animate(){
 }
 
 function graphGanho1(){
+function truncate(str, maxLength, suffix) {
+	if(str.length > maxLength) {
+		str = str.substring(0, maxLength + 1); 
+		str = str.substring(0, Math.min(str.length, str.lastIndexOf(" ")));
+		str = str + suffix;
+	}
+	return str;
+}
 
-  var h = $(".exploregraph-container").height(); //298
+var h = $(".exploregraph-container").height(); //298
 var w = $(".exploregraph-container").width();  //504
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
+var margin = {top: 30, right: 50, bottom: 30, left: 50},
   width = w - margin.left - margin.right,
   height = h - margin.top - margin.bottom;
 
-// Parse the date / time
-var parseDate = d3.time.format("%d-%b-%y").parse;
 
-// Set the ranges
-var x = d3.time.scale().range([0, width]);
-var y = d3.scale.linear().range([height, 0]);
+//var margin = {top: 20, right: 200, bottom: 0, left: 20},
+//	width = 350,
+//	height = 650;
 
-// Define the axes
-var xAxis = d3.svg.axis().scale(x)
-  .orient("bottom").ticks(5);
+var start_year = 2009,
+	end_year = 2013;
 
-var yAxis = d3.svg.axis().scale(y)
-  .orient("left").ticks(5);
+var c = d3.scale.category20c();
 
-// Define the line
-var valueline = d3.svg.line()
-  .x(function(d) { return x(d.date); })
-  .y(function(d) { return y(d.close); });
+var x = d3.scale.linear()
+	.range([0, width]);
 
-// Adds the svg canvas
-var chart1 = d3.select("comparecontent")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient("top")
+  .ticks(5);
 
-// SLIDER
-$("#timeline").empty();
-var formatter = d3.format("d");
-var tickFormatter = function(d) {
-  return "Ano " + formatter(d);
-}
+var formatYears = d3.format("0000");
+xAxis.tickFormat(formatYears);
 
-var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
-d3.select('#timeline').call(slider);
-
-d3.select('#play')
-  .attr("title", "Play Animation")
-  .on("click", function(){
-    if(!isPlaying) {
-      isPlaying = true;
-      d3.select(this).classed("pause", true).attr("title", "Pause Animation");
-      //animate aqui
-    } else {
-      isPlaying = false;
-      d3.select(this).classed("pause", false).attr("title", "Play Animation");
-      //stop animate
-    }
-  });
-
-//Play
-var isPlaying = false;
-
-function animate(){
-
-}
-
-// Get the data ------------------------------- our data ----------------------------------
-d3.json("data/dataset-sample.json", function(error,data) {
-  dataset = data.data;
-  //console.log(data);
+var svg = d3.select("comparecontent").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.style("margin-left", margin.left + "px")
+	.append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-  dataset.forEach(function(d) {
-    //console.log(d)
-    if (d.Territórios) {
-     // console.log(d.Territórios);
+d3.json("data/journals_tacs.json", function(data) {
+	x.domain([start_year, end_year]);
+	var xScale = d3.scale.linear()
+		.domain([start_year, end_year])
+		.range([0, width]);
 
-    }
-  })
-  });
+	svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + 0 + ")")
+		.call(xAxis);
 
+	for (var j = 0; j < data.length; j++) {
+		var g = svg.append("g").attr("class","journal");
 
-// Get the data
-d3.csv("data1.csv", function(error, data) {
-  data.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.close = +d.close;
-  });
+		var circles = g.selectAll("circle")
+			.data(data[j]['articles'])
+			.enter()
+			.append("circle");
 
-  // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.close; })]);
+		var text = g.selectAll("text")
+			.data(data[j]['articles'])
+			.enter()
+			.append("text");
 
-  // Add the valueline path.
-  chart1.append("path")
-    .attr("class", "line")
-    .attr("d", valueline(data));
+		var rScale = d3.scale.linear()
+			.domain([0, d3.max(data[j]['articles'], function(d) { return d[1]; })])
+			.range([2, 9]);
 
-  // Add the X Axis
-  chart1.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+		circles
+			.attr("cx", function(d, i) { return xScale(d[0]); })
+			.attr("cy", j*20+20)
+			.attr("r", function(d) { return rScale(d[1]); })
+			.style("fill", function(d) { return c(j); });
 
-  // Add the Y Axis
-  chart1.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
+		text
+			.attr("y", j*20+25)
+			.attr("x",function(d, i) { return xScale(d[0])-0; })
+			.attr("class","value")
+			.text(function(d){ return d[1]; })
+			.style("fill", function(d) { return c(j); })
+			.style("display","none");
 
+		g.append("text")
+			.attr("y", j*20+25)
+			.attr("x",-50)
+			.attr("class","label")
+			.text(truncate(data[j]['name'],10,"..."))
+			.style("fill", function(d) { return c(j); })
+			.on("mouseover", mouseover)
+			.on("mouseout", mouseout);
+	};
+
+	function mouseover(p) {
+		var g = d3.select(this).node().parentNode;
+		d3.select(g).selectAll("circle").style("display","none");
+		d3.select(g).selectAll("text.value").style("display","block");
+	}
+
+	function mouseout(p) {
+		var g = d3.select(this).node().parentNode;
+		d3.select(g).selectAll("circle").style("display","block");
+		d3.select(g).selectAll("text.value").style("display","none");
+	}
 })
-
 }
 
 !(function (d3) {
 
 $("comparecontent").empty();
 
-graphGanho();
+graphGanho1();
 drawTimeLine();
 
 })(d3);
