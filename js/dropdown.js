@@ -32,7 +32,7 @@ function checkIt(data) {
         var selectedValue = d3.event.target.value;
         var selectedIndex = d3.event.target.selectedIndex;
 
-        alert("You selected the option at index " + selectedIndex + ", with value attribute "+ selectedValue);
+        //alert("You selected the option at index " + selectedIndex + ", with value attribute "+ selectedValue);
 
         var selectedDOMElement =
             d3.event.target.children[selectedIndex];
@@ -53,7 +53,8 @@ function checkIt(data) {
         return ("you selected: " + " " + selection.text())
         };
         var elem = $("#selectedNUTS")[0];
-        elem.innerHTML = selection.text();
+        elem.innerHTML = selectedIndex;
+        $.getScript("js/explore.js");
         //alert(makePie());
     };
 

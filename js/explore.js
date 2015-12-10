@@ -1,5 +1,5 @@
 
-function graphBar(){
+function graphBar(selectedNuts){
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
@@ -36,7 +36,7 @@ var chart = d3.select("explorecontent")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.json("data/dataset-sample.json", function(error, data) {
+d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
   data.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
@@ -44,20 +44,21 @@ d3.json("data/dataset-sample.json", function(error, data) {
   });
 
   // Scale the range of the data
-  x.domain([2009,d3.max(data[4].escolaridadeTotal, function(d) { return d[0]; })]);
-  y.domain([0, d3.max(data[4].escolaridadeTotal, function(d) { return d[1]; })]);
+
+  x.domain([2009,d3.max(data[selectedNuts].escolaridadeTotal, function(d) { return d[0]; })]);
+  y.domain([0, d3.max(data[selectedNuts].escolaridadeTotal, function(d) { return d[1]; })]);
 
   // Add the valueline path.
   chart.append("path")
     .attr("class", "line")
-    .attr("d", valueline(data[0].escolaridadeTotal));
+    .attr("d", valueline(data[selectedNuts].escolaridadeTotal));
 
 
   //bars
   var barWidth = 40;
 
   var bar = chart.selectAll("g")
-      .data(data[4].escolaridadeTotal)
+      .data(data[selectedNuts].escolaridadeTotal)
     .enter().append("g")
       .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
 
@@ -69,7 +70,7 @@ d3.json("data/dataset-sample.json", function(error, data) {
 
   bar.append("title")
       .attr("dy", ".75em")
-      .text(function(d) { return (d[0] + " : " + d[1] +"€") });
+      .text(function(d) { return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€") });
 
 
   // Add the X Axis
@@ -98,6 +99,12 @@ d3.json("data/dataset-sample.json", function(error, data) {
 
 $("explorecontent").empty();
 
+var selectedNuts = 0;
+
+var elem = $("#selectedNUTS").text();
+
+selectedNuts = elem;
+
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
 
@@ -117,7 +124,7 @@ var xAxis = d3.svg.axis().scale(x)
 var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(5);
 
-graphBar()
+graphBar(selectedNuts)
 
 /*
 // Adds the svg canvas - PRIMEIRO GRAFICO - GANHO POR NIVEL DE ESCOLARIDADE
