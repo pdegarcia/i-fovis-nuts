@@ -116,11 +116,9 @@ d3.json("data/dataset.json", function(error, data) {
 
 $("explorecontent").empty();
 
-var selectedNuts = 0;
-
 var elem = $("#selectedNUTS").text();
 
-selectedNuts = elem;
+var selectedNuts = elem;
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
@@ -279,7 +277,7 @@ var line = d3.svg.line()
   bar.append("title")
       .attr("dy", ".75em")
       .text(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
-                          console.log(dif);
+                          //console.log(dif);
                           return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif) });
 
   // Add the X Axis

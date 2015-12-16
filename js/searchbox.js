@@ -100,13 +100,17 @@ $('#areas-query').typeahead({
    },
    callback: {
        onClickAfter: function (node, a, item, event) {
+           
+        
 
            var r = false;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
            if (r == true) {
-              //window.open(item.href);
+              window.open(item.href);
            }
            var elem = $("#selectedNUTS")[0];
             elem.innerHTML = item.display;
+            
+            console.log(item);
 
            $('#result-container').text('');
 

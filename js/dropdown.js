@@ -45,8 +45,8 @@ function checkIt(data) {
             .map(function(entry) { return entry.values[0]; });
 
         //Output selected country with all its values
-        console.log("your selection is");
-        console.dir(uniqueData[selectedIndex].values[0]);
+        //console.log("your selection is");
+        //console.dir(uniqueData[selectedIndex].values[0]);
 
         //making Pie
         function makePie() {
@@ -99,8 +99,8 @@ function loadCat(data) {
            .entries(data)
            .map(function(entry) { return entry.values[0]; });
 
-       console.log("your selection is");
-       console.dir(uniqueData[selectedIndex].values[0]);
+       //console.log("your selection is");
+       //console.dir(uniqueData[selectedIndex].values[0]);
 
        //making Pie
        function makePie() {
