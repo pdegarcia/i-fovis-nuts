@@ -76,6 +76,7 @@ $('#areas-query').typeahead({
        );
 
        return $.map(sortGroup, function (val, i) {
+           console.log(val + " : " + i);
            return val.group
        });
    },
@@ -85,13 +86,13 @@ $('#areas-query').typeahead({
    href: "{{display}}",   /* Container que pode ser formatado como quisermos. */
    template: "{{display}}, <small><em>{{group}}</em></small>",
    source: {
-       "NUT I": {
+       "NUTS I": {
            data: names.nutsi
        },
-       "NUT II": {
+       "NUTS II": {
            data: names.nutsii
        },
-       "NUT III": {
+       "NUTS III": {
            data: names.nutsiii
        },
        "Municípios": {

@@ -67,23 +67,24 @@ d3.json("data/dataset.json", function(error, data) {
     .attr("class", "line")
     .attr("d", valueline(data[selectedNuts].escolaridadeTotal));
 
-
-
-
   //bars
   
-  var barWidth = 20;
+  var barWidth = 10;
 
   var bar = chart.selectAll("g")
       .data(data[selectedNuts].escolaridadeTotal)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
                                                         // i * barWidth
+                                                        
+                                                       
   bar.append("rect")
-      .attr("y", function(d) { return y(d[1]); })
+      .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
-      .attr("height", function(d) { return height-y(d[1]); })
-      .attr("width", barWidth - 1);
+      .attr("height", 10)//function(d) { return height-y(d[1]); })
+      .attr("width", barWidth - 1)
+      .on("mouseover", mouseover)
+			.on("mouseout", mouseout);
 
   bar.append("title")
       .attr("dy", ".75em")
@@ -108,17 +109,33 @@ d3.json("data/dataset.json", function(error, data) {
     .style("font-size", "16px")
     .style("font-weight", "bold")
     .text("Ganho Total - Todas as Escolaridades");
+    
+    
+  
 
-})}
+})
+
+	function mouseover(p) {
+		var g = d3.select(this).node().parentNode;
+		//d3.select(g).selectAll("rect").style("display","none");
+		d3.select(g).selectAll("text.value").style("display","block");
+	}
+
+	function mouseout(p) {
+		var g = d3.select(this).node().parentNode;
+		d3.select(g).selectAll("rect").style("display","block");
+		d3.select(g).selectAll("text.value").style("display","none");
+	}
+  }
 
 
 !(function (d3) {
 
 $("explorecontent").empty();
 
-var elem = $("#selectedNUTS").text();
+var elem = $("#selectedNUTSCompare").text();
 
-var selectedNuts = elem;
+var selectedNuts = elem[0];
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();

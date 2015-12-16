@@ -52,7 +52,7 @@ function checkIt(data) {
         function makePie() {
         return ("you selected: " + " " + selection.text())
         };
-        var elem = $("#selectedNUTS")[0];
+        var elem = $("#selectedNUTSCompare")[0];
         elem.innerHTML = selectedIndex;
         $.getScript("js/explore.js");
         //alert(makePie());

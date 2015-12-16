@@ -248,6 +248,7 @@ function animate(){
 }
 
 function graphGanho1(selectedNutsCompare){
+  
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
 		str = str.substring(0, maxLength + 1); 
@@ -315,6 +316,7 @@ d3.json("data/dataset.json", function(error, data1) {
   console.log(dataNovo);
 
 d3.json("data/journals_tacs.json", function(data) {
+  
 	x.domain(selectedNutsCompare);
   
 	var xScale = d3.scale.linear()
@@ -341,7 +343,7 @@ d3.json("data/journals_tacs.json", function(data) {
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([700, d3.max(data1[selectedNutsCompare[j]].escolaridadeTotal, function(d) { return d[1]; })])
+			.domain([650, d3.max(data1[selectedNutsCompare[j]].escolaridadeTotal, function(d) { return d[1]; })])
 			.range([3, 18]);
 
 		circles
@@ -357,7 +359,7 @@ d3.json("data/journals_tacs.json", function(data) {
 			.text(function(d){ return d[1]; })
 			.style("fill", function(d) { return c(j); })
 			.style("display","block");
-
+      
 		g.append("text")
 			.attr("y", j*50+25)
 			.attr("x",-80)
@@ -386,7 +388,7 @@ d3.json("data/journals_tacs.json", function(data) {
 
 $("comparecontent").empty();
 
-var elem = $("#selectedNUTS").text();
+var elem = $("#selectedNUTSCompare").text();
 
 var selectedNutsCompare = [4,6,3,6,20];
 
