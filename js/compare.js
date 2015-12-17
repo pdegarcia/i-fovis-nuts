@@ -247,7 +247,8 @@ function animate(){
 
 }
 
-function graphGanho1(){
+function graphGanho1(selectedNutsCompare){
+  
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
 		str = str.substring(0, maxLength + 1); 
@@ -261,7 +262,7 @@ var h = $(".exploregraph-container").height(); //298
 var w = $(".exploregraph-container").width();  //504
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 100, bottom: 30, left: 50},
+var margin = {top: 30, right: 60, bottom: 30, left: 80},
   width = w - margin.left - margin.right,
   height = h - margin.top - margin.bottom;
 
@@ -283,8 +284,8 @@ var xAxis = d3.svg.axis()
 	.orient("top")
   .ticks(5);
 
-var formatYears = d3.format("0000");
-xAxis.tickFormat(formatYears);
+//var formatYears = d3.format("0000");
+//xAxis.tickFormat(formatYears);
 
 var svg = d3.select("comparecontent").append("svg")
 	.attr("width", width + margin.left + margin.right)
@@ -293,43 +294,57 @@ var svg = d3.select("comparecontent").append("svg")
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("data/dataset-sample.json", function(error, data1) {
+d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
+      d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
+      d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
+      d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
+      d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+
+      d.ganho = [[2009,d.ganhoTotal.ano2009],[2009,d.inferiorBasico.ano2009],[2009,d.igualBasico.ano2009],[2009,d.igualSecundario.ano2009],[2009,d.igualSuperior.ano2009]]
       //console.log(d.compraPerCapita);
       //console.log(d);
   });
   
+  var dataNovo = [];
+  for (var j = 0; j < selectedNutsCompare.length; j++) {
+  dataNovo.push(data1[selectedNutsCompare[j]])
+   
+  }
+  console.log(dataNovo);
 
 d3.json("data/journals_tacs.json", function(data) {
-	x.domain([start_year, end_year]);
+  
+	x.domain(selectedNutsCompare);
+  
 	var xScale = d3.scale.linear()
 		.domain([start_year, end_year])
 		.range([0, width]);
+    
 	svg.append("g")
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + 0 + ")")
 		.call(xAxis);
 
-	for (var j = 0; j < data.length; j++) {
+	for (var j = 0; j < selectedNutsCompare.length; j++) {
 		var g = svg.append("g").attr("class","journal");
     
 		var circles = g.selectAll("circle")
-			.data(data1[j].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].escolaridadeTotal + " :  " + data[j]['articles']);
+    console.log(data1[j].ganho + " "+ data1[j].escolaridadeTotal + " :  " + data[j]['articles']);
 		var text = g.selectAll("text")
-			.data(data1[j].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
 			.enter()
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([700, d3.max(data1[j].escolaridadeTotal, function(d) { console.log(d);
-                                                                   return d[1]; })])
-			.range([2, 15]);
+			.domain([650, d3.max(data1[selectedNutsCompare[j]].escolaridadeTotal, function(d) { return d[1]; })])
+			.range([3, 18]);
 
 		circles
 			.attr("cx", function(d, i) { return xScale(d[0]); })
@@ -338,18 +353,18 @@ d3.json("data/journals_tacs.json", function(data) {
 			.style("fill", function(d) { return c(j); });
 
 		text
-			.attr("y", j*50+25)
-			.attr("x",function(d, i) { return xScale(d[0])-0; })
+			.attr("y", j*50+20)
+			.attr("x",function(d, i) { return xScale(d[0])-15; })
 			.attr("class","value")
 			.text(function(d){ return d[1]; })
 			.style("fill", function(d) { return c(j); })
-			.style("display","none");
-
+			.style("display","block");
+      
 		g.append("text")
 			.attr("y", j*50+25)
-			.attr("x",-50)
+			.attr("x",-80)
 			.attr("class","label")
-			.text(truncate(data[j]['name'],10,"..."))
+			.text(truncate(data1[selectedNutsCompare[j]]._id,10,"..."))
 			.style("fill", function(d) { return c(j); })
 			.on("mouseover", mouseover)
 			.on("mouseout", mouseout);
@@ -373,7 +388,11 @@ d3.json("data/journals_tacs.json", function(data) {
 
 $("comparecontent").empty();
 
-graphGanho1();
-drawTimeLine();
+var elem = $("#selectedNUTSCompare").text();
+
+var selectedNutsCompare = [4,6,3,6,20];
+
+graphGanho1(selectedNutsCompare);
+//drawTimeLine();
 
 })(d3);

@@ -45,14 +45,14 @@ function checkIt(data) {
             .map(function(entry) { return entry.values[0]; });
 
         //Output selected country with all its values
-        console.log("your selection is");
-        console.dir(uniqueData[selectedIndex].values[0]);
+        //console.log("your selection is");
+        //console.dir(uniqueData[selectedIndex].values[0]);
 
         //making Pie
         function makePie() {
         return ("you selected: " + " " + selection.text());
         };
-        var elem = $("#selectedNUTS")[0];
+        var elem = $("#selectedNUTSCompare")[0];
         elem.innerHTML = selectedIndex;
         $.getScript("js/explore.js");
         //alert(makePie());
@@ -99,8 +99,8 @@ function loadCat(data) {
            .entries(data)
            .map(function(entry) { return entry.values[0]; });
 
-       console.log("your selection is");
-       console.dir(uniqueData[selectedIndex].values[0]);
+       //console.log("your selection is");
+       //console.dir(uniqueData[selectedIndex].values[0]);
 
        //making Pie
        function makePie() {
