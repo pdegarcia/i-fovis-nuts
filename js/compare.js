@@ -184,7 +184,8 @@ d3.json("data/dataset.json", function(error, data1) {
 
 		var rScale = d3.scale.linear()
 			.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
-			.range([3, 18]);
+      //.domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
+			.range([5, 18]);
 
 		circles
 			.attr("cx", function(d, i) { return xScale(d[0]); })
@@ -282,11 +283,7 @@ var svg = d3.select("comparecontent").append("svg")
 d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
   data1.forEach(function(d) {
-      //d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
-      //d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
-      //d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
-      //d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
-      //d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      
       //console.log(d);
       d.poderCompra = [[2009,d.compraPerCapita.ano2009], [2011,d.compraPerCapita.ano2011]]
       d.selected = d.poderCompra 
@@ -326,7 +323,8 @@ d3.json("data/dataset.json", function(error, data1) {
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([650, d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
+			//.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
+      .domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
 			.range([3, 18]);
 
 		circles

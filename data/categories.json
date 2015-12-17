@@ -9,11 +9,7 @@
         { "_id": "igualSecundario",
           "_name": "Ganho para Escolaridade Equivalente ao Secundário" },
         { "_id": "igualSuperior",
-          "_name": "Ganho para Escolaridade Equivalente ao Superior" },
-        { "_id": "compraPerCapita",
-          "_name": "Poder de Compra per capita" },
-        { "_id": "consultasPorHab",
-          "_name": "Consultas por Habitante" }
+          "_name": "Ganho para Escolaridade Equivalente ao Superior" }
     ]
   }
 }

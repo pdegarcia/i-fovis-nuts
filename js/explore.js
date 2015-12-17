@@ -1,5 +1,5 @@
 
-function graphBarGanho(selectedNuts){
+function graphBarGanho(selectedNuts, id){
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
@@ -39,24 +39,36 @@ var chart = d3.select("explorecontent").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+console.log("recebi isto: " + id);
 // Get the data
 d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
-  data.forEach(function(d) {
+  data.forEach(function(d) {     
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
-      //console.log(d.compraPerCapita);
-  });
+      d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
+      d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
+      d.escolaridadeIgualSecundario = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
+      d.escolaridadeIgualSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      
 
+      if(id==1){ d.selected = d.escolaridadeTotal }
+      else if(id==2){ d.selected = d.escolaridadeMenorBasico }
+      else if(id==3){ d.selected = d.escolaridadeIgualBasico }
+      else if(id==4){ d.selected = d.escolaridadeIgualSecundario }
+      else if(id==5){ d.selected = d.escolaridadeIgualSuperior }
+      
+      
+  });
   // Scale the range of the data
 
-  x.domain([2009,d3.max(data[selectedNuts].escolaridadeTotal, function(d) { return d[0]; })]);
+  x.domain([2009,d3.max(data[selectedNuts].selected, function(d) { return d[0]; })]);
   //y.domain([0, d3.max(data[0].escolaridadeTotal, function(d) { return d[1]; })]);
-  y.domain([0, 1100]);
+  y.domain([0, d3.max(data[0].selected, function(d) { return d[0]; })]);
 
   // Add the valueline of Portugal median  
   chart.append("path")
     .attr("class", "line")
-    .attr("d", valueline(data[0].escolaridadeTotal))
+    .attr("d", valueline(data[0].selected))
     .style("stroke","red")
     .style("stroke-linecap","round")
     .style("stroke-width","1")
@@ -65,14 +77,14 @@ d3.json("data/dataset.json", function(error, data) {
   // Add the valueline path.
   chart.append("path")
     .attr("class", "line")
-    .attr("d", valueline(data[selectedNuts].escolaridadeTotal));
+    .attr("d", valueline(data[selectedNuts].selected));
 
   //bars
   
   var barWidth = 10;
 
   var bar = chart.selectAll("g")
-      .data(data[selectedNuts].escolaridadeTotal)
+      .data(data[selectedNuts].selected)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
                                                         // i * barWidth
@@ -88,7 +100,8 @@ d3.json("data/dataset.json", function(error, data) {
 
   bar.append("title")
       .attr("dy", ".75em")
-      .text(function(d) { return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€") });
+      .text(function(d) {   console.log(d)
+                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€") });
 
 
   // Add the X Axis
@@ -138,11 +151,11 @@ $("explorecontent").empty();
 
 var elem = $("#selectedNUTS").text();
 var selectedNuts = elem;
-elem = $("#selectedCat").text();
-//var res = elem.split(":")[0];
-var selectedCat = elem;
 
-console.log(selectedNuts + " : " + selectedCat)
+elem = $("#selectedGanho").text();
+var selectedGanho = elem;
+
+graphBarGanho(selectedNuts, selectedGanho);
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
@@ -166,7 +179,6 @@ var yAxis = d3.svg.axis().scale(y)
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears); 
 
-graphBarGanho(selectedNuts)
 
 // Adds the svg canvas - SEGUNDO GRAFICO - PODER DE COMPRA PER CAPITA
 var chart2 = d3.select("explorecontent")
