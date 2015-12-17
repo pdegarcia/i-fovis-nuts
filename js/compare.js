@@ -368,6 +368,15 @@ d3.json("data/journals_tacs.json", function(data) {
 			.style("fill", function(d) { return c(j); })
 			.on("mouseover", mouseover)
 			.on("mouseout", mouseout);
+      
+    g.append("text")
+			.attr("y", 10)
+			.attr("x",j*50+25)
+			.attr("class","label")
+			.text(truncate(data1[selectedNutsCompare[j]]._id,10,"..."))
+			.style("fill", function(d) { return c(j); })
+			.on("mouseover", mouseover)
+			.on("mouseout", mouseout);
 	};
 
 	function mouseover(p) {

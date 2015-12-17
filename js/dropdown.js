@@ -6,7 +6,7 @@ function checkIt(data) {
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
-          var nome =d.ambito + " : " + d._id
+          var nome =d.ambito + " : " + d._id;
         return nome;
     })
         .entries(data);
@@ -16,7 +16,7 @@ function checkIt(data) {
 	var dropDown = d3.select("#dropdown_container")
                    .append("select")
                    .attr("class", "selection")
-                    .attr("name", "country-list");
+                   .attr("name", "country-list");
 
     var options = dropDown.selectAll("option")
                   .data(data)
@@ -56,7 +56,8 @@ function checkIt(data) {
         elem.innerHTML = selectedIndex;
         
         elem = $("#selectedCat")[0];
-        elem.innerHTML = selection.text();
+        var res = selectedValue.split(":");
+        elem.innerHTML = res[0];
         
         $.getScript("js/explore.js");
         //alert(makePie());

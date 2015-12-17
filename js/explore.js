@@ -137,11 +137,9 @@ d3.json("data/dataset.json", function(error, data) {
 $("explorecontent").empty();
 
 var elem = $("#selectedNUTS").text();
-
 var selectedNuts = elem;
-
 elem = $("#selectedCat").text();
-
+//var res = elem.split(":")[0];
 var selectedCat = elem;
 
 console.log(selectedNuts + " : " + selectedCat)
