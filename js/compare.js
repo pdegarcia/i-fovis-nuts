@@ -1,170 +1,3 @@
-function graphGanho(){
-
-
-  var h = $(".exploregraph-container").height(); //298
-var w = $(".exploregraph-container").width();  //504
-
-// Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-  width = w - margin.left - margin.right,
-  height = h - margin.top - margin.bottom;
-
-// Parse the date / time
-var parseDate = d3.time.format("%d-%b-%y").parse;
-
-// Set the ranges
-var x = d3.time.scale().range([0, width]);
-var y = d3.scale.linear().range([height, 0]);
-
-// Define the axes
-var xAxis = d3.svg.axis().scale(x)
-  .orient("bottom").ticks(5);
-
-var yAxis = d3.svg.axis().scale(y)
-  .orient("left").ticks(5);
-
-// Define the line
-var valueline = d3.svg.line()
-  .x(function(d) { return x(d.date); })
-  .y(function(d) { return y(d.close); });
-
-// Adds the svg canvas
-var chart1 = d3.select("comparecontent")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-// Get the data ------------------------------- our data ----------------------------------
-
-var elem = $("#selectedNUTS").text();
-console.log(elem);
-
-d3.json("data/dataset-sample.json", function(error, data) {
-  data1 = data.document.nuts;
-  data1.forEach(function(d) {
-      d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
-      //console.log(d.compraPerCapita);
-
-      if(d._id==elem){
-        console.log("looool");
-      }
-      console.log(d._id===elem)
-  });
-
-
-
-// Get the data
-d3.csv("data1.csv", function(error, data) {
-  data.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.close = +d.close;
-  });
-
-  // Scale the range of the data
-  x.domain([2009, d3.max(data1[4].escolaridadeTotal, function(d) { //console.log(d[1]);
-                                          return d[0]; })]);
-  y.domain([0, d3.max(data1[4].escolaridadeTotal, function(d) { //console.log(d[1]);
-                                          return d[1]; })]);
-
-  var line = d3.svg.line()
- 			// assign the X function to plot our line as we wish
- 			.x(function(d) {
-        // console.log(d);
- 				// verbose logging to show what's actually being done
- 				 console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.');
- 				// return the X coordinate where we want to plot this datapoint
- 				return x(d[0]);
- 			})
- 			.y(function(d) {
- 				// verbose logging to show what's actually being done
- 				 console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale.");
- 				// return the Y coordinate where we want to plot this datapoint
- 				return y(d[1]);
- 			})
-  // Add the valueline path.
-  chart1.append("path")
-    .attr("class", "line")
-    .attr("d", line(data1[4].escolaridadeTotal));
-
-//bars
-  var barWidth = 40;
-
-  var bar = chart1.selectAll("g")
-      .data(data1[4].escolaridadeTotal)
-    .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
-
-  bar.append("rect")
-      .attr("y", function(d) { return 0; })
-      .attr("fill", "steelblue")
-      .attr("height", function(d) { return d[1]-700; })
-      .attr("width", barWidth - 1);
-
-  bar.append("title")
-      .attr("dy", ".75em")
-      .text(function(d) { return (d[0] + " : " + d[1] +"€") });
-  // Add the X Axis
-  chart1.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-
-  // Add the Y Axis
-  chart1.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-
-})});
-
-  /* HANDLERS BOTOES */
-  d3.selectAll("#ganhoT")
-    .on("click", function () {
-      console.log("Ganho Total Pressed");
-      //para cada NUT seleccionado, apresentar Ganho Total
-      //No caso do total, só apresenta uma bola
-    });
-
-  d3.selectAll("#ganhoIB")
-    .on("click", function () {
-      console.log("Ganho Inferior ao Básico Pressed");
-      //para cada NUT seleccionado, apresentar Ganho IB
-      //No caso do ganho IB, EB, ESec e ESup, aparecem em bolas ordenadas no eixo do Y
-    });
-
-  d3.selectAll("#ganhoEB")
-    .on("click", function () {
-      console.log("Ganho Equivalente ao Básico Pressed");
-      //para cada NUT seleccionado, apresentar Ganho EB
-    });
-
-  d3.selectAll("#ganhoESec")
-    .on("click", function () {
-      console.log("Ganho Equivalente ao Secundário Pressed");
-      //para cada NUT seleccionado, apresentar Ganho ESec
-    });
-
-  d3.selectAll("#ganhoESup")
-    .on("click", function () {
-      console.log("Ganho Equivalente ao Superior Pressed");
-      //para cada NUT seleccionado, apresentar Ganho ESup
-    });
-
-  d3.selectAll("#poder")
-    .on("click", function () {
-      console.log("Poder de Compra per capita Pressed");
-      //para cada NUT seleccionado, apresentar Poder de compra
-    });
-
-  d3.selectAll("#consultas")
-    .on("click", function () {
-      console.log("Consultas Pressed");
-      //para cada NUT seleccionado, apresentar Consultas
-    });
-};
-
 function drawTimeLine(){
   // SLIDER
 $("#timeline").empty();
@@ -287,6 +120,8 @@ var xAxis = d3.svg.axis()
 //var formatYears = d3.format("0000");
 //xAxis.tickFormat(formatYears);
 
+var escolaridades = ["Total","< Básico","= Básico","= Secundário","= Superior"]
+
 var svg = d3.select("comparecontent").append("svg")
 	.attr("width", width + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom)
@@ -302,9 +137,6 @@ d3.json("data/dataset.json", function(error, data1) {
       d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
       d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
       d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
-
-      d.ganho = [[2009,d.ganhoTotal.ano2009],[2009,d.inferiorBasico.ano2009],[2009,d.igualBasico.ano2009],[2009,d.igualSecundario.ano2009],[2009,d.igualSuperior.ano2009]]
-      //console.log(d.compraPerCapita);
       //console.log(d);
   });
   
@@ -315,8 +147,6 @@ d3.json("data/dataset.json", function(error, data1) {
   }
   console.log(dataNovo);
 
-d3.json("data/journals_tacs.json", function(data) {
-  
 	x.domain(selectedNutsCompare);
   
 	var xScale = d3.scale.linear()
@@ -336,7 +166,7 @@ d3.json("data/journals_tacs.json", function(data) {
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].ganho + " "+ data1[j].escolaridadeTotal + " :  " + data[j]['articles']);
+    console.log(data1[j].ganho + " "+ data1[j].escolaridadeTotal);
 		var text = g.selectAll("text")
 			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
 			.enter()
@@ -370,11 +200,11 @@ d3.json("data/journals_tacs.json", function(data) {
 			.on("mouseout", mouseout);
       
     g.append("text")
-			.attr("y", 10)
-			.attr("x",j*50+25)
+			.attr("y", -5)
+			.attr("x",j*100)
 			.attr("class","label")
-			.text(truncate(data1[selectedNutsCompare[j]]._id,10,"..."))
-			.style("fill", function(d) { return c(j); })
+			.text(escolaridades[j])
+			//.style("fill", function(d) { return c(j); })
 			.on("mouseover", mouseover)
 			.on("mouseout", mouseout);
 	};
@@ -390,8 +220,7 @@ d3.json("data/journals_tacs.json", function(data) {
 		d3.select(g).selectAll("circle").style("display","block");
 		d3.select(g).selectAll("text.value").style("display","none");
 	}
-})})
-}
+})}
 
 !(function (d3) {
 
@@ -402,6 +231,53 @@ var elem = $("#selectedNUTSCompare").text();
 var selectedNutsCompare = [4,6,3,6,20];
 
 graphGanho1(selectedNutsCompare);
-//drawTimeLine();
+//graphGanho();
+drawTimeLine();
+
+
+  /* HANDLERS BOTOES */
+  d3.selectAll("#ganhoT")
+    .on("click", function () {
+      console.log("Ganho Total Pressed");
+      //para cada NUT seleccionado, apresentar Ganho Total
+      //No caso do total, só apresenta uma bola
+    });
+
+  d3.selectAll("#ganhoIB")
+    .on("click", function () {
+      console.log("Ganho Inferior ao Básico Pressed");
+      //para cada NUT seleccionado, apresentar Ganho IB
+      //No caso do ganho IB, EB, ESec e ESup, aparecem em bolas ordenadas no eixo do Y
+    });
+
+  d3.selectAll("#ganhoEB")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Básico Pressed");
+      //para cada NUT seleccionado, apresentar Ganho EB
+    });
+
+  d3.selectAll("#ganhoESec")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Secundário Pressed");
+      //para cada NUT seleccionado, apresentar Ganho ESec
+    });
+
+  d3.selectAll("#ganhoESup")
+    .on("click", function () {
+      console.log("Ganho Equivalente ao Superior Pressed");
+      //para cada NUT seleccionado, apresentar Ganho ESup
+    });
+
+  d3.selectAll("#poder")
+    .on("click", function () {
+      console.log("Poder de Compra per capita Pressed");
+      //para cada NUT seleccionado, apresentar Poder de compra
+    });
+
+  d3.selectAll("#consultas")
+    .on("click", function () {
+      console.log("Consultas Pressed");
+      //para cada NUT seleccionado, apresentar Consultas
+    });
 
 })(d3);
