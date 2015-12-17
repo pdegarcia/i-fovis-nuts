@@ -136,9 +136,9 @@ d3.json("data/dataset.json", function(error, data) {
 
 $("explorecontent").empty();
 
-var elem = $("#selectedNUTSCompare").text();
+var elem = $("#selectedNUTS").text();
 
-var selectedNuts = elem[0];
+var selectedNuts = elem;
 
 elem = $("#selectedCat").text();
 
