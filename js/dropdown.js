@@ -6,7 +6,7 @@ function checkIt(data) {
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
-          var nome = d._id; //d.ambito + ":" + d._id
+          var nome =d.ambito + " : " + d._id
         return nome;
     })
         .entries(data);
@@ -54,6 +54,10 @@ function checkIt(data) {
         };
         var elem = $("#selectedNUTSCompare")[0];
         elem.innerHTML = selectedIndex;
+        
+        elem = $("#selectedCat")[0];
+        elem.innerHTML = selection.text();
+        
         $.getScript("js/explore.js");
         //alert(makePie());
     };

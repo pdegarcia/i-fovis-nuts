@@ -118,12 +118,15 @@ d3.json("data/dataset.json", function(error, data) {
 	function mouseover(p) {
 		var g = d3.select(this).node().parentNode;
 		//d3.select(g).selectAll("rect").style("display","none");
+    d3.select(g).selectAll("rect").attr("fill", "darkblue")
+                                  .style("display","block");
 		d3.select(g).selectAll("text.value").style("display","block");
 	}
 
 	function mouseout(p) {
 		var g = d3.select(this).node().parentNode;
-		d3.select(g).selectAll("rect").style("display","block");
+		d3.select(g).selectAll("rect").attr("fill", "steelblue")
+                                  .style("display","block");
 		d3.select(g).selectAll("text.value").style("display","none");
 	}
   }
@@ -136,6 +139,12 @@ $("explorecontent").empty();
 var elem = $("#selectedNUTSCompare").text();
 
 var selectedNuts = elem[0];
+
+elem = $("#selectedCat").text();
+
+var selectedCat = elem;
+
+console.log(selectedNuts + " : " + selectedCat)
 
 var h = $(".graph-container").height();
 var w = $(".graph-container").width();
@@ -278,18 +287,20 @@ var line = d3.svg.line()
     
   //bars
   
-  var barWidth = 20;
+  var barWidth = 10;
 
   var bar = chart3.selectAll("g")
       .data(data[selectedNuts].consultas)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
-                                                        // i * barWidth
-  bar.append("rect")
-      .attr("y", function(d) { return y(d[1]); })
+
+ bar.append("rect")
+      .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
-      .attr("height", function(d) { return height-y(d[1]); })
-      .attr("width", barWidth - 1);  
+      .attr("height", 10)
+      .attr("width", barWidth - 1)
+      .on("mouseover", mouseover)
+			.on("mouseout", mouseout);
 
   bar.append("title")
       .attr("dy", ".75em")
@@ -319,5 +330,19 @@ var line = d3.svg.line()
 
 });
 
+	function mouseover(p) {
+		var g = d3.select(this).node().parentNode;
+		//d3.select(g).selectAll("rect").style("display","none");
+    d3.select(g).selectAll("rect").attr("fill", "darkblue")
+                                  .style("display","block");
+		d3.select(g).selectAll("text.value").style("display","block");
+	}
+
+	function mouseout(p) {
+		var g = d3.select(this).node().parentNode;
+		d3.select(g).selectAll("rect").attr("fill", "steelblue")
+                                  .style("display","block");
+		d3.select(g).selectAll("text.value").style("display","none");
+	}
 
 })(d3);
