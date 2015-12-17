@@ -80,7 +80,7 @@ function animate(){
 
 }
 
-function graphGanho(selectedNutsCompare){
+function graphGanho(selectedNutsCompare, id){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -120,7 +120,7 @@ var xAxis = d3.svg.axis()
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears);
 
-var escolaridades = ["Total","< Básico","= Básico","= Secundário","= Superior"]
+//var escolaridades = ["Total","< Básico","= Básico","= Secundário","= Superior"]
 
 var svg = d3.select("comparecontent").append("svg")
 	.attr("width", width + margin.left + margin.right)
@@ -135,8 +135,15 @@ d3.json("data/dataset.json", function(error, data1) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
       d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
-      d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
-      d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      d.escolaridadeIgualSecundario = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
+      d.escolaridadeIgualSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      
+      if(id===1){ d.selected = d.escolaridadeTotal }
+      else if(id===2){ d.selected = d.escolaridadeMenorBasico }
+      else if(id===3){ d.selected = d.escolaridadeIgualBasico }
+      else if(id===4){ d.selected = d.escolaridadeIgualSecundario }
+      else if(id===5){ d.selected = d.escolaridadeIgualSuperior }
+      
       //console.log(d);
   });
   
@@ -162,18 +169,18 @@ d3.json("data/dataset.json", function(error, data1) {
 		var g = svg.append("g").attr("class","journal");
     
 		var circles = g.selectAll("circle")
-			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].ganho + " "+ data1[j].escolaridadeTotal);
+    console.log(data1[j].ganho + " "+ data1[j].selected);
 		var text = g.selectAll("text")
-			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([650, d3.max(data1[selectedNutsCompare[j]].escolaridadeTotal, function(d) { return d[1]; })])
+			.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
 			.range([3, 18]);
 
 		circles
@@ -281,6 +288,8 @@ d3.json("data/dataset.json", function(error, data1) {
       d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
       //console.log(d);
       
+      d.selected = d.escolaridadeTotal
+      
       d.ganho = [[2009,d.ganhoTotal.ano2009],[2009,d.inferiorBasico.ano2009],[2009,d.igualBasico.ano2009],[2009,d.igualSecundario.ano2009],[2009,d.igualSuperior.ano2009]]
   });
   
@@ -306,18 +315,18 @@ d3.json("data/dataset.json", function(error, data1) {
 		var g = svg.append("g").attr("class","journal");
     
 		var circles = g.selectAll("circle")
-			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].ganho + " "+ data1[j].escolaridadeTotal);
+    console.log(data1[j].ganho + " "+ data1[j].selected);
 		var text = g.selectAll("text")
-			.data(data1[selectedNutsCompare[j]].escolaridadeTotal)
+			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([650, d3.max(data1[selectedNutsCompare[j]].escolaridadeTotal, function(d) { return d[1]; })])
+			.domain([650, d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
 			.range([3, 18]);
 
 		circles
@@ -383,7 +392,7 @@ drawTimeLine();
     .on("click", function () {
       console.log("Ganho Total Pressed");
       $("comparecontent").empty();
-      graphGanho(selectedNutsCompare);
+      graphGanho(selectedNutsCompare, 1);
       drawTimeLine();
       //para cada NUT seleccionado, apresentar Ganho Total
       //No caso do total, só apresenta uma bola
@@ -393,7 +402,7 @@ drawTimeLine();
     .on("click", function () {
       console.log("Ganho Inferior ao Básico Pressed");
       $("comparecontent").empty();
-      //graphGanho(selectedNutsCompare);
+      graphGanho(selectedNutsCompare, 2);
       drawTimeLine();
       //para cada NUT seleccionado, apresentar Ganho IB
       //No caso do ganho IB, EB, ESec e ESup, aparecem em bolas ordenadas no eixo do Y
@@ -402,18 +411,27 @@ drawTimeLine();
   d3.selectAll("#ganhoEB")
     .on("click", function () {
       console.log("Ganho Equivalente ao Básico Pressed");
+      $("comparecontent").empty();
+      graphGanho(selectedNutsCompare, 3);
+      drawTimeLine();
       //para cada NUT seleccionado, apresentar Ganho EB
     });
 
   d3.selectAll("#ganhoESec")
     .on("click", function () {
       console.log("Ganho Equivalente ao Secundário Pressed");
+      $("comparecontent").empty();
+      graphGanho(selectedNutsCompare, 4);
+      drawTimeLine();
       //para cada NUT seleccionado, apresentar Ganho ESec
     });
 
   d3.selectAll("#ganhoESup")
     .on("click", function () {
       console.log("Ganho Equivalente ao Superior Pressed");
+      $("comparecontent").empty();
+      graphGanho(selectedNutsCompare, 5);
+      drawTimeLine();
       //para cada NUT seleccionado, apresentar Ganho ESup
     });
 
