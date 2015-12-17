@@ -119,10 +119,6 @@ var explore_map = new function(){
 		
 	});
 	
-	this.teste= function(){
-		alert();
-	};
-	
 	this.changeToNUTS1= function() {
 		map.dataProvider = NUTS1;
 		map.validateData();
@@ -130,6 +126,7 @@ var explore_map = new function(){
 	this.changeToNUTS2= function() {
 		map.dataProvider = NUTS2;
 		map.validateData();
+		
 		// changeMapSelection("PT-L1");
 		// alert(getSelectedRegion());		
 	};
@@ -169,8 +166,9 @@ var explore_map = new function(){
 	
 	map.addListener("homeButtonClicked", handleGoHome);
 	map.addListener('selectedObjectChanged', function (event) {
-		mapselectedRegion = map.selectedObject.title;
-		
+		if(map.selectedObject.title!=null){
+			mapselectedRegion = map.selectedObject.title;
+		}
 		//refreshInfo();
 	});
 };
