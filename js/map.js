@@ -128,7 +128,6 @@ var explore_map = new function(){
 		map.validateData();
 	};
 	this.changeToNUTS2= function() {
-		alert();
 		map.dataProvider = NUTS2;
 		map.validateData();
 		// changeMapSelection("PT-L1");
