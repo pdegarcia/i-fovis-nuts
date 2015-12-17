@@ -137,12 +137,15 @@ d3.json("data/dataset.json", function(error, data1) {
       d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
       d.escolaridadeIgualSecundario = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
       d.escolaridadeIgualSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      d.consultas = [[2009,d.consultasPorHab.ano2009], [2010,d.consultasPorHab.ano2010], [2011,d.consultasPorHab.ano2011], [2012,d.consultasPorHab.ano2012]]
+      
       
       if(id===1){ d.selected = d.escolaridadeTotal }
       else if(id===2){ d.selected = d.escolaridadeMenorBasico }
       else if(id===3){ d.selected = d.escolaridadeIgualBasico }
       else if(id===4){ d.selected = d.escolaridadeIgualSecundario }
       else if(id===5){ d.selected = d.escolaridadeIgualSuperior }
+      else if(id===6){ d.selected = d.consultas }
       
       //console.log(d);
   });
@@ -229,7 +232,7 @@ d3.json("data/dataset.json", function(error, data1) {
 	}
 })}
 
-function graphPoderCompra(selectedNutsCompare){
+function graphPoderCompraConsultas(selectedNutsCompare, id){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -266,10 +269,8 @@ var xAxis = d3.svg.axis()
 	.orient("top")
   .ticks(5);
 
-//var formatYears = d3.format("0000");
-//xAxis.tickFormat(formatYears);
-
-var escolaridades = ["Total","< Básico","= Básico","= Secundário","= Superior"]
+var formatYears = d3.format("0000");
+xAxis.tickFormat(formatYears);
 
 var svg = d3.select("comparecontent").append("svg")
 	.attr("width", width + margin.left + margin.right)
@@ -281,16 +282,15 @@ var svg = d3.select("comparecontent").append("svg")
 d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
   data1.forEach(function(d) {
-      d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
-      d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
-      d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
-      d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
-      d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
+      //d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
+      //d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
+      //d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
+      //d.escolaridadeIgualSecudanrio = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
+      //d.escolaridadeIgulaSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
       //console.log(d);
-      
-      d.selected = d.escolaridadeTotal
-      
-      d.ganho = [[2009,d.ganhoTotal.ano2009],[2009,d.inferiorBasico.ano2009],[2009,d.igualBasico.ano2009],[2009,d.igualSecundario.ano2009],[2009,d.igualSuperior.ano2009]]
+      d.poderCompra = [[2009,d.compraPerCapita.ano2009], [2011,d.compraPerCapita.ano2011]]
+      d.selected = d.poderCompra 
+
   });
   
   var dataNovo = [];
@@ -300,7 +300,7 @@ d3.json("data/dataset.json", function(error, data1) {
   }
   console.log(dataNovo);
 
-	x.domain(selectedNutsCompare);
+	x.domain([start_year, end_year]);
   
 	var xScale = d3.scale.linear()
 		.domain([start_year, end_year])
@@ -349,15 +349,6 @@ d3.json("data/dataset.json", function(error, data1) {
 			.attr("class","label")
 			.text(truncate(data1[selectedNutsCompare[j]]._id,10,"..."))
 			.style("fill", function(d) { return c(j); })
-			.on("mouseover", mouseover)
-			.on("mouseout", mouseout);
-      
-    g.append("text")
-			.attr("y", -5)
-			.attr("x",j*100)
-			.attr("class","label")
-			.text(escolaridades[j])
-			//.style("fill", function(d) { return c(j); })
 			.on("mouseover", mouseover)
 			.on("mouseout", mouseout);
 	};
@@ -439,7 +430,7 @@ drawTimeLine();
     .on("click", function () {
       console.log("Poder de Compra per capita Pressed");
       $("comparecontent").empty();
-      graphPoderCompra(selectedNutsCompare);
+      graphPoderCompraConsultas(selectedNutsCompare, 1);
       drawTimeLine();
       //para cada NUT seleccionado, apresentar Poder de compra
     });
@@ -447,6 +438,9 @@ drawTimeLine();
   d3.selectAll("#consultas")
     .on("click", function () {
       console.log("Consultas Pressed");
+      $("comparecontent").empty();
+      graphGanho(selectedNutsCompare, 6);
+      drawTimeLine();
       //para cada NUT seleccionado, apresentar Consultas
     });
 
