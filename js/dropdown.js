@@ -6,12 +6,12 @@ function checkIt(data) {
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
-          var nome = d._id //d.ambito + ":" + d._id
+          var nome = d._id; //d.ambito + ":" + d._id
         return nome;
     })
         .entries(data);
 // creating dropdown
-    var data = JSON.stringify(nutsByName)
+    var data = JSON.stringify(nutsByName);
     var data = JSON.parse(data);
 	var dropDown = d3.select("#dropdown_container")
                    .append("select")
@@ -50,7 +50,7 @@ function checkIt(data) {
 
         //making Pie
         function makePie() {
-        return ("you selected: " + " " + selection.text())
+        return ("you selected: " + " " + selection.text());
         };
         var elem = $("#selectedNUTS")[0];
         elem.innerHTML = selectedIndex;
@@ -66,11 +66,11 @@ function loadCat(data) {
 
     var categories = d3.nest()
           .key(function (d) {
-            var nome = d._name
+            var nome = d._name;
           return nome; })
           .entries(data);
 
-    var data = JSON.stringify(categories)
+    var data = JSON.stringify(categories);
     var data = JSON.parse(data);
 
     var dropCloropleth = d3.select("#dropdownCloropleth_container")
@@ -89,7 +89,7 @@ function loadCat(data) {
     var changePie = function() {
        var selectedValue = d3.event.target.value;
        var selectedIndex = d3.event.target.selectedIndex;
-
+       
        var selectedDOMElement = d3.event.target.children[selectedIndex];
        var selection = d3.select(selectedDOMElement);
 
@@ -104,7 +104,7 @@ function loadCat(data) {
 
        //making Pie
        function makePie() {
-         return ("you selected: " + " " + selection.text())
+         return ("you selected: " + " " + selection.text());
        };
 
        var elem = $("#selectedCat")[0];

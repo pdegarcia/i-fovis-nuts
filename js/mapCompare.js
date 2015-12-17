@@ -4,13 +4,13 @@ var C_selectedRegions=[];
 var C_cities = {
 	map : "portugalLow",
 	getAreasFromMap : true,
-	zoomLevel: 4,
+	zoomLevel: 1,
 };
 
 var C_NUTS3 = {
 	map : "continentsLow",
 	getAreasFromMap : true,
-	zoomLevel: 3,
+	zoomLevel: 1,
 	areas: [ {
 		id: "PT-13",
 		groupId: "Lisboa"
@@ -53,7 +53,7 @@ var C_NUTS3 = {
 var C_NUTS2 = {
 	map : "portugalRegionsLow",
 	getAreasFromMap : true,
-	zoomLevel: 2,
+	zoomLevel: 1,
 	areas: [ {
 		id: "PT-L1",
 		groupId: "Lisboa"
