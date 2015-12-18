@@ -63,7 +63,7 @@ d3.json("data/dataset.json", function(error, data) {
 
   x.domain([2009,d3.max(data[selectedNuts].selected, function(d) { return d[0]; })]);
   //y.domain([0, d3.max(data[0].escolaridadeTotal, function(d) { return d[1]; })]);
-  y.domain([0, d3.max(data[0].selected, function(d) { return d[0]; })]);
+  y.domain([0, 3000]);
 
   // Add the valueline of Portugal median  
   chart.append("path")
@@ -152,6 +152,10 @@ $("explorecontent").empty();
 var elem = $("#selectedNUTS").text();
 var selectedNuts = elem;
 
+  var elem1 = $("#selectedCat").text();
+  var res = elem +":"+elem1;
+  console.log(res);
+
 elem = $("#selectedGanho").text();
 var selectedGanho = elem;
 
@@ -199,7 +203,7 @@ d3.json("data/dataset.json", function(error, data) {
   // Scale the range of the data
   x.domain([2009, d3.max(data[selectedNuts].poderCompra, function(d) { //console.log(d);
                                                     return d[0]; })]);
-  y.domain([0, 100]);
+  y.domain([0, 300]);
 
 var line1 = d3.svg.line()
  			// assign the X function to plot our line as we wish
@@ -250,6 +254,10 @@ var chart3 = d3.select("explorecontent")
   .append("g")
     .attr("transform", "translate(" + (margin.left + w*0.25) + "," + (margin.top + h*0.05) + ")");
 
+// Define the axes
+  yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(8);
+
 // Get the data
 
 d3.json("data/dataset.json", function(error, data) {
@@ -263,7 +271,7 @@ d3.json("data/dataset.json", function(error, data) {
   // Scale the range of the data
   x.domain([2009, d3.max(data[selectedNuts].consultas, function(d) { //console.log(d[0]);
                                           return d[0]; })]);
-  y.domain([0, 4 ]);
+  y.domain([0, 8]);
 
 var line = d3.svg.line()
  			// assign the X function to plot our line as we wish

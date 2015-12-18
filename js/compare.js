@@ -233,7 +233,7 @@ d3.json("data/dataset.json", function(error, data1) {
 	}
 })}
 
-function graphPoderCompraConsultas(selectedNutsCompare, id){
+function graphPoderCompraConsultas(selectedNutsCompare){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -369,10 +369,17 @@ d3.json("data/dataset.json", function(error, data1) {
 $("comparecontent").empty();
 
 var elem = $("#selectedNUTSCompare").text();
+var selectedNutsCompare = elem;
 
-var selectedNutsCompare = [4,6,3,6,20];
+console.log(elem);
 
-graphGanho(selectedNutsCompare);
+var elem1 = $("#selectedSearchBox").text();
+
+var res = elem1.split(":");
+
+console.log(res);
+
+graphGanho(selectedNutsCompare, 1);
 drawTimeLine();
 
 
@@ -428,7 +435,7 @@ drawTimeLine();
     .on("click", function () {
       console.log("Poder de Compra per capita Pressed");
       $("comparecontent").empty();
-      graphPoderCompraConsultas(selectedNutsCompare, 1);
+      graphPoderCompraConsultas(selectedNutsCompare);
       drawTimeLine();
       //para cada NUT seleccionado, apresentar Poder de compra
     });

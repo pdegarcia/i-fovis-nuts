@@ -104,15 +104,16 @@ $('#areas-query').typeahead({
            
         
 
-           var r = false;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
+           var r = true;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
            if (r == true) {
-              window.open(item.href);
+              alert(item.href);
            }
-           var elem = $("#selectedNUTS")[0];
-            elem.innerHTML = item.display;
+           var elem = $("#selectedSearchBox")[0];
+            elem.innerHTML = item.display + ":" + item.group;
             
             console.log(item);
-
+            
+           $.getScript("js/compare.js");
            $('#result-container').text('');
 
        },
