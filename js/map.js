@@ -81,10 +81,10 @@ var explore_map = new function(){
 		getAreasFromMap : true,
 		zoomLevel: 1,
 		areas: [ {
-			id: "PT-L1",
+			id: "206",
 			groupId: "Lisboa"
 		},{
-			id: "PT-L2",
+			id: "206_1",
 			groupId: "Lisboa"	
 		}],
 	};

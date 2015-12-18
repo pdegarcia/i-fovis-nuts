@@ -1,183 +1,211 @@
-var C_selectedRegions=[];
-
-
-var C_cities = {
-	map : "portugalLow",
-	getAreasFromMap : true,
-	zoomLevel: 1,
-};
-
-var C_NUTS3 = {
-	map : "continentsLow",
-	getAreasFromMap : true,
-	zoomLevel: 1,
-	areas: [ {
-		id: "PT-13",
-		groupId: "Lisboa"
-	},{
-		id: "PT-15",
-		groupId: "Lisboa"	
-	},
-	{
-		id: "PT-16",
-		groupId: "Beiras e Serra da Estrela"	
-	},
-	{
-		id: "PT-17",
-		groupId: "Beiras e Serra da Estrela"	
-	},
-	{
-		id: "PT-28",
-		groupId: "Beiras e Serra da Estrela"	
-	},
-	{
-		id: "PT-7",
-		groupId: "Beira Baixa"	
-	},
-	{
-		id: "PT-21",
-		groupId: "Beira Baixa"	
-	},
-	{
-		id: "PT-5",
-		groupId: "Região de Coimbra"	
-	},
-	{
-		id: "PT-11",
-		groupId: "Região de Coimbra"	
-	},
+var compare_map= new function(){
+	var selectedRegions=[];
+	var cities = {
+		map : "portugalLow",
+		getAreasFromMap : true,
+		zoomLevel : 1,
+	};
 	
-	],
-};
-
-var C_NUTS2 = {
-	map : "portugalRegionsLow",
-	getAreasFromMap : true,
-	zoomLevel: 1,
-	areas: [ {
-		id: "PT-L1",
-		groupId: "Lisboa"
-	},{
-		id: "PT-L2",
-		groupId: "Lisboa"	
-	}],
-};
-
-var C_NUTS1 = {
-	map : "worldLow",
-	zoomLevel: 1,
-	areas : [{
-		id : "PT",
-		color : "#CCCCCC",
-		passZoomValuesToTarget : true
-	}]
-
-};
-
-var C_map = AmCharts.makeChart("C_mapdiv", {
-	type : "map",
-	pathToImages : "http://www.ammap.com/lib/3/images/",
-	panEventsEnabled : true,
-	areasSettings : {
-		autoZoom : false,
-		rollOverOutlineColor : "#555555",
-		selectedColor : "#5EB7DE",
-		color : "#CCCCCC",
-		colorSolid : "#5EB7DE",
-		rollOverColor : "#9EC2F7",
-		selectable : true
-	},
-	fitMapToContainer: true,
+	var NUTS3 = {
+		map : "continentsLow",
+		getAreasFromMap : true,
+		zoomLevel: 1,
+		areas: [ {
+			id: "207",
+			groupId: "Lisboa"
+		},{
+			id: "207_1",
+			groupId: "Lisboa"	
+		},
+		{
+			id: "190",
+			groupId: "Beiras e Serra da Estrela"	
+		},
+		{
+			id: "190_1",
+			groupId: "Beiras e Serra da Estrela"	
+		},
+		{
+			id: "190_2",
+			groupId: "Beiras e Serra da Estrela"	
+		},
+		{
+			id: "169_1",
+			groupId: "Beira Baixa"	
+		},
+		{
+			id: "169",
+			groupId: "Beira Baixa"	
+		},
+		{
+			id: "123",
+			groupId: "Região de Coimbra"	
+		},
+		{
+			id: "123_1",
+			groupId: "Região de Coimbra"	
+		},
+		{
+			id: "30_1",
+			groupId: "Porto"
+		},
+		{
+			id: "30",
+			groupId: "Porto"
+		}
+		
+		],
+	};
 	
-	dataProvider : C_NUTS1,
-	smallMap : {},
-	"responsive" : {
-		"enabled" : true
-	},
-	mouseWheelZoomEnabled : true,
-	zoomDuration : 0.3,
-	zoomControl : {
-		zoomControlEnabled : true,
-		panControlEnabled : true
-	},
+	var NUTS2 = {
+		map : "portugalRegionsLow",
+		getAreasFromMap : true,
+		zoomLevel: 1,
+		areas: [ {
+			id: "206",
+			groupId: "Lisboa"
+		},{
+			id: "206_1",
+			groupId: "Lisboa"	
+		}],
+	};
 	
-});
-
-function C_cleanSelection(){
-	for (var i in C_map.dataProvider.areas) {
-            var area = C_map.dataProvider.areas[i];
-            if (area.showAsSelected) {
-                states.push(area.title);
-            }
-    }
-}
-
-function C_refreshInfo(){
-	 // let's build a list of currently selected states
-        C_selectedRegions = [];
-        for (var i in C_map.dataProvider.areas) {
-            var area = C_map.dataProvider.areas[i];
-            if (area.showAsSelected) {
-                C_selectedRegions.push(area.title);
-            }
-        }
-       // alert("Selected states:<br />" + (states.length ? states.join(", ") : "none"));
-       // alert(document.getElementById("mapdiv")); 
-      
-        var elem = $("#C_info")[0];
-        // alert(elem);
-        elem.innerHTML = "Selected Regions:<br />" + (C_selectedRegions.length ? C_selectedRegions.join(", ") : "none");
-}
-
-function C_changeToNUTS1() {
-	C_map.dataProvider = C_NUTS1;
-	C_map.validateData();
-}
-
-function C_changeToNUTS2() {
-	C_map.dataProvider = C_NUTS2;
-	C_map.validateData();
-}
-
-function C_changeToNUTS3() {
-	C_map.dataProvider = C_NUTS3;
-	C_map.validateData();
-}
-
-function C_changeToCities() {
-	C_map.selectedObject = C_map.dataProvider;
-	C_map.dataProvider = C_cities;
-	C_map.validateData();
-}	
-
-
-function C_handleGoHome() {
-	C_map.dataProvider = NUTS1;
-	C_map.validateNow();
-}
-
-function C_handleMapObjectClick(event) {
-	if (event.mapObject.id == "backButton") {
-		C_handleGoHome();
+	var NUTS1 = {
+		map : "worldLow",
+		zoomLevel: 1,
+		areas : [{
+			id : "0",
+			color : "#CCCCCC",
+			passZoomValuesToTarget : true
+		}]
+	
+	};
+	
+	var map = AmCharts.makeChart("C_mapdiv", {
+		type : "map",
+		pathToImages : "http://www.ammap.com/lib/3/images/",
+		panEventsEnabled : true,
+		areasSettings : {
+			autoZoom : false,
+			rollOverOutlineColor : "#555555",
+			selectedColor : "#5EB7DE",
+			color : "#CCCCCC",
+			colorSolid : "#5EB7DE",
+			rollOverColor : "#9EC2F7",
+			selectable : true
+		},
+		fitMapToContainer: true,
+		
+		dataProvider : NUTS1,
+		smallMap : {},
+		"responsive" : {
+			"enabled" : true
+		},
+		mouseWheelZoomEnabled : true,
+		zoomDuration : 0.3,
+		zoomControl : {
+			zoomControlEnabled : true,
+			panControlEnabled : true
+		},
+		
+	});
+	
+	function cleanSelection(){
+		for (var i in map.dataProvider.areas) {
+	            var area = map.dataProvider.areas[i];
+	            if (area.showAsSelected) {
+	                states.push(area.title);
+	            }
+	    }
 	}
-}
-
-// monitor when home icon was clicked and also go to continents map
-
-C_map.addListener("homeButtonClicked", C_handleGoHome);
-C_map.addListener('clickMapObject', function (event) {
-        //C_handleMapObjectClick();
-        // deselect the area by assigning all of the dataProvider as selected object
-        //C_map.selectedObject = C_map.dataProvider;
-        
-        // toggle showAsSelected
-        event.mapObject.showAsSelected = !event.mapObject.showAsSelected;
-        
-        // bring it to an appropriate color
-        C_map.returnInitialColor(event.mapObject);
-        
-        C_refreshInfo();
-        
-        //clickMapObject(mapObject) ccionar o click
-        //zoomToSelectedObject(mapObject) zoom para o objecto seleccionado
-});
+	
+	function refreshInfo(){
+		 // let's build a list of currently selected states
+	        selectedRegions = [];
+	        for (var i in map.dataProvider.areas) {
+	            var area = map.dataProvider.areas[i];
+	            if (area.showAsSelected) {
+	                selectedRegions.push(area.title);
+	            }
+	        }
+	       // alert("Selected states:<br />" + (states.length ? states.join(", ") : "none"));
+	       // alert(document.getElementById("mapdiv")); 
+	      
+	        // var elem = $("#info")[0];
+	        // // alert(elem);
+	        // elem.innerHTML = "Selected Regions:<br />" + (selectedRegions.length ? selectedRegions.join(", ") : "none");
+	}
+	
+	this.changeToNUTS1 =function() {
+		map.dataProvider = NUTS1;
+		map.validateData();
+	};
+	
+	this.changeToNUTS2 =function() {
+		map.dataProvider = NUTS2;
+		map.validateData();
+	};
+	
+	this.changeToNUTS3 =function() {
+		map.dataProvider = NUTS3;
+		map.validateData();
+	};
+	
+	this.changeToCities =function() {
+		map.selectedObject = map.dataProvider;
+		map.dataProvider = cities;
+		map.validateData();
+	};	
+	
+	
+	function handleGoHome() {
+		map.dataProvider = NUTS1;
+		map.validateNow();
+	}
+	
+	function handleMapObjectClick(event) {
+		if (event.mapObject.id == "backButton") {
+			handleGoHome();
+		}
+	}
+	
+	// monitor when home icon was clicked and also go to continents map
+	
+	map.addListener("homeButtonClicked", handleGoHome);
+	map.addListener('clickMapObject', function (event) {
+	        //handleMapObjectClick();
+	        // deselect the area by assigning all of the dataProvider as selected object
+	        //map.selectedObject = map.dataProvider;
+	        
+	       
+	        var id=event.mapObject.id.split("_");
+	        id=id[0];
+	        console.log(id);
+	     	if(id=="30" || id=="123" || id=="169" || id=="190" || id=="207" || id=="206"){
+	     		var mapObject = map.getObjectById(id);
+	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       		 map.returnInitialColor(mapObject);
+	       		 
+	       		 mapObject = map.getObjectById(id+"_1");
+	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       		 map.returnInitialColor(mapObject);
+	       		 
+	       		 if(id=="190"){
+	       		 	 mapObject = map.getObjectById(id+"_2");
+	     			 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       			 map.returnInitialColor(mapObject);
+	       		 }	       		 
+	       		 
+	     	}else{
+	     		 // toggle showAsSelected
+	       		 event.mapObject.showAsSelected = !event.mapObject.showAsSelected;
+	       		 // bring it to an appropriate color
+	       		 map.returnInitialColor(event.mapObject);
+	     	}
+	        
+	        refreshInfo();
+	        
+	        //clickMapObject(mapObject) ccionar o click
+	        //zoomToSelectedObject(mapObject) zoom para o objecto seleccionado
+	});
+};
