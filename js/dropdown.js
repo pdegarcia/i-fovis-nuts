@@ -59,6 +59,7 @@ function checkIt(data) {
         var res = selectedValue.split(":");
         elem.innerHTML = res[0];
         
+        
         $.getScript("js/explore.js");
         //alert(makePie());
     };
@@ -112,9 +113,11 @@ function loadCat(data) {
          return ("you selected: " + " " + selection.text());
        };
 
-       var elem = $("#selectedCat")[0];
-       elem.innerHTML = selection.text();
-       //alert(makePie());*/
+       var elem = $("#selectedGanho")[0];
+       elem.innerHTML = selectedIndex+1;
+       
+       $.getScript("js/explore.js");
+       //alert(makePie());
    };
 
     d3.select("#dropdownCloropleth_container").on("change", changePie);
