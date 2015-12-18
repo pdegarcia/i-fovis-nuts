@@ -62,9 +62,7 @@ d3.json("data/dataset.json", function(error, data) {
       
   });
   // Scale the range of the data
-
   x.domain([2009,d3.max(data[selectedNuts].selected, function(d) { return d[0]; })]);
-  //y.domain([0, d3.max(data[0].escolaridadeTotal, function(d) { return d[1]; })]);
   y.domain([0, 3000]);
 
   // Add the valueline of Portugal median  
@@ -84,28 +82,29 @@ d3.json("data/dataset.json", function(error, data) {
   //bars
   
   var barWidth = 10;
-  
-  
+
   var bar = chart.selectAll("g")
       .data(data[selectedNuts].selected)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
-                                                        // i * barWidth
+                                                    
+  /* Initialize tooltip */
+  tip = d3.tip().attr('class', 'd3-tip')
+              .html(function(d, i) { var dif = d[1]-data[0].selected[i][1]
+                                  return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif.toFixed(2) + "€" ) });
+
+  /* Invoke the tip in the context of your visualization */
+  chart.call(tip)
+                                                   
                                                                                                        
   bar.append("rect")
       .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
       .attr("height", 10)//function(d) { return height-y(d[1]); })
       .attr("width", barWidth - 1)
-      .on("mouseover", mouseover)
-			.on("mouseout", mouseout);
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
-  bar.append("title")
-      .attr("dy", ".75em")
-      .text(function(d,i) {   var dif = d[1]-data[0].selected[i][1]
-                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif.toFixed(2) + "€" )});
-
-  // Add the X Axis
   chart.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
@@ -123,27 +122,7 @@ d3.json("data/dataset.json", function(error, data) {
     .style("font-size", "16px")
     .style("font-weight", "bold")
     .text("Ganho Total - Todas as Escolaridades");
-    
-    
-  
-
-})
-
-	function mouseover(p) {
-		var g = d3.select(this).node().parentNode;
-		//d3.select(g).selectAll("rect").style("display","none");
-    d3.select(g).selectAll("rect").attr("fill", "darkblue")
-                                  .style("display","block");
-		d3.select(g).selectAll("text.value").style("display","block");
-	}
-
-	function mouseout(p) {
-		var g = d3.select(this).node().parentNode;
-		d3.select(g).selectAll("rect").attr("fill", "steelblue")
-                                  .style("display","block");
-		d3.select(g).selectAll("text.value").style("display","none");
-	}
-  }
+})}
 
 
 !(function (d3) {
@@ -154,7 +133,6 @@ var elem = $("#selectedNUTS").text();
 var selectedNuts = elem;
 
 //Make selection to the map
- 
 var elem1 = $("#selectedCat").text();
 
 explore_map.changeSelectionFromAnyRegion(elem1, elem);
@@ -199,12 +177,10 @@ d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
   data.forEach(function(d) {
       d.poderCompra = [[2009,d.compraPerCapita.ano2009], [2011,d.compraPerCapita.ano2011]]
-      //console.log(d.compraPerCapita);
   });
 
   // Scale the range of the data
-  x.domain([2009, d3.max(data[selectedNuts].poderCompra, function(d) { //console.log(d);
-                                                    return d[0]; })]);
+  x.domain([2009, d3.max(data[selectedNuts].poderCompra, function(d) { return d[0]; })]);
   y.domain([0, 300]);
 
 var line1 = d3.svg.line()
@@ -226,7 +202,6 @@ var line1 = d3.svg.line()
     .attr("class", "line")
     .attr("d", line1(data[selectedNuts].poderCompra));
 
-
   // Add the X Axis
   chart2.append("g")
     .attr("class", "x axis")
@@ -245,7 +220,6 @@ var line1 = d3.svg.line()
     .style("font-size", "16px")
     .style("font-weight", "bold")
     .text("Poder de Compra per capita");
-
 });
 
 // Adds the svg canvas - TERCEIRO GRAFICO - CONSULTAS POR HABITANTE
@@ -261,35 +235,20 @@ var chart3 = d3.select("explorecontent")
         .orient("left").ticks(8);
 
 // Get the data
-
 d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
   data.forEach(function(d) {
       d.consultas = [[2009,d.consultasPorHab.ano2009], [2010,d.consultasPorHab.ano2010], [2011,d.consultasPorHab.ano2011], [2012,d.consultasPorHab.ano2012]]
-      //console.log(d);
   });
 
-
   // Scale the range of the data
-  x.domain([2009, d3.max(data[selectedNuts].consultas, function(d) { //console.log(d[0]);
-                                          return d[0]; })]);
+  x.domain([2009, d3.max(data[selectedNuts].consultas, function(d) { return d[0]; })]);
   y.domain([0, 8]);
 
 var line = d3.svg.line()
  			// assign the X function to plot our line as we wish
- 			.x(function(d) {
-        // console.log(d);
- 				// verbose logging to show what's actually being done
- 				// console.log('Plotting X value for data point: ' + d[0] + ' to be at: '+ x(d[0]) + ' using our xScale.');
- 				// return the X coordinate where we want to plot this datapoint
- 				return x(d[0]);
- 			})
- 			.y(function(d) {
- 				// verbose logging to show what's actually being done
- 				// console.log('Plotting Y value for data point: ' + d[1] + ' to be at: ' + y(d[0]) + " using our yScale.");
- 				// return the Y coordinate where we want to plot this datapoint
- 				return y(d[1]);
- 			})
+ 			.x(function(d) { return x(d[0]); })
+ 			.y(function(d) { return y(d[1]); })
   // Add the valueline of Portugal median  
   chart3.append("path")
     .attr("class", "line")
@@ -304,9 +263,15 @@ var line = d3.svg.line()
     .attr("class", "line")
     .attr("d", line(data[selectedNuts].consultas));
     
+  /* Initialize tooltip */
+  tip = d3.tip().attr('class', 'd3-tip')
+              .html(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
+                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif.toFixed(2)); });
+
+  /* Invoke the tip in the context of your visualization */
+  chart3.call(tip)
     
   //bars
-  
   var barWidth = 10;
 
   var bar = chart3.selectAll("g")
@@ -319,14 +284,8 @@ var line = d3.svg.line()
       .attr("fill", "steelblue")
       .attr("height", 10)
       .attr("width", barWidth - 1)
-      .on("mouseover", mouseover)
-			.on("mouseout", mouseout);
-
-  bar.append("title")
-      .attr("dy", ".75em")
-      .text(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
-                          //console.log(dif);
-                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif.toFixed(2)) });
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
   // Add the X Axis
   chart3.append("g")
@@ -349,20 +308,4 @@ var line = d3.svg.line()
     .text("Consultas por Habitante");
 
 });
-
-	function mouseover(p) {
-		var g = d3.select(this).node().parentNode;
-		//d3.select(g).selectAll("rect").style("display","none");
-    d3.select(g).selectAll("rect").attr("fill", "darkblue")
-                                  .style("display","block");
-		d3.select(g).selectAll("text.value").style("display","block");
-	}
-
-	function mouseout(p) {
-		var g = d3.select(this).node().parentNode;
-		d3.select(g).selectAll("rect").attr("fill", "steelblue")
-                                  .style("display","block");
-		d3.select(g).selectAll("text.value").style("display","none");
-	}
-
 })(d3);

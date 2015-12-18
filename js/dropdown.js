@@ -2,11 +2,7 @@
 
 function checkIt(data) {
     data = data.document.nuts;
-    
-    var elem = $("#selectedNUTS").text();
-    var selectedNuts = elem;    
 
-    //var regexp = new RegExp(',');
     var nutsByName = d3.nest()
         .key(function (d) {
           var nome =d.ambito + " : " + d._id;
@@ -34,8 +30,6 @@ function checkIt(data) {
         //get the data value and index from the event
         var selectedValue = d3.event.target.value;
         var selectedIndex = d3.event.target.selectedIndex;
-
-        //alert("You selected the option at index " + selectedIndex + ", with value attribute "+ selectedValue);
 
         var selectedDOMElement =
             d3.event.target.children[selectedIndex];

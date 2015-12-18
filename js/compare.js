@@ -1,4 +1,5 @@
 setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS I ","0"); }, 1000);
+
 function drawTimeLine(){
   // SLIDER
 $("#timeline").empty();
@@ -100,11 +101,6 @@ var margin = {top: 30, right: 60, bottom: 30, left: 80},
   width = w - margin.left - margin.right,
   height = h - margin.top - margin.bottom;
 
-
-//var margin = {top: 20, right: 200, bottom: 0, left: 20},
-//	width = 350,
-//	height = 650;
-
 var start_year = 2009,
 	end_year = 2013;
 
@@ -179,13 +175,6 @@ d3.json("data/dataset.json", function(error, data1) {
 
       //console.log(d);
   });
-  
-  var dataNovo = [];
-  for (var j = 0; j < selectedNutsCompare.length; j++) {
-  dataNovo.push(data1[selectedNutsCompare[j]])
-   
-  }
-  //console.log(dataNovo);
 
 	x.domain([start_year, end_year]);
   
@@ -213,7 +202,6 @@ d3.json("data/dataset.json", function(error, data1) {
 
 		var rScale = d3.scale.linear()
 			.domain([400, d3.max(data1[0].selected, function(d) { return d[1]; })+100])
-      //.domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
 			.range([5, 18]);
 
 		circles
@@ -238,15 +226,7 @@ d3.json("data/dataset.json", function(error, data1) {
 			.style("fill", function(d) { return c(j); })
 			.on("mouseover", mouseover)
 			.on("mouseout", mouseout);
-      
-/*    g.append("text")
-			.attr("y", -5)
-			.attr("x",j*100)
-			.attr("class","label")
-			.text(escolaridades[j])
-			//.style("fill", function(d) { return c(j); })
-			.on("mouseover", mouseover)
-			.on("mouseout", mouseout);*/
+
 	};
 
 	function mouseover(p) {
@@ -280,11 +260,6 @@ var w = $(".exploregraph-container").width();  //504
 var margin = {top: 30, right: 60, bottom: 30, left: 80},
   width = w - margin.left - margin.right,
   height = h - margin.top - margin.bottom;
-
-
-//var margin = {top: 20, right: 200, bottom: 0, left: 20},
-//	width = 350,
-//	height = 650;
 
 var start_year = 2009,
 	end_year = 2013;
@@ -352,7 +327,6 @@ d3.json("data/dataset.json", function(error, data1) {
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			//.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
       .domain([50, 250])
 			.range([5, 18]);
 

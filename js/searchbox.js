@@ -100,8 +100,6 @@ $('#areas-query').typeahead({
    },
    callback: {
        onClickAfter: function (node, a, item, event) {
-           
-        
 
            var r = false;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
            if (r == true) {
@@ -109,9 +107,7 @@ $('#areas-query').typeahead({
            }
            var elem = $("#selectedSearchBox")[0];
             elem.innerHTML = item.display + ":" + item.group;
-            
-            //console.log(item);
-            
+
            $.getScript("js/compare.js");
            $('#result-container').text('');
 
@@ -128,5 +124,5 @@ $('#areas-query').typeahead({
 
        }
    },
-   debug: true
+   debug: false
 });
