@@ -1,5 +1,6 @@
 var compare_map= new function(){
 	var selectedRegions=[];
+	var currentNUT=1;
 	var cities = {
 		map : "portugalLow",
 		getAreasFromMap : true,
@@ -119,43 +120,98 @@ var compare_map= new function(){
 	    }
 	}
 	
-	function refreshInfo(){
-		 // let's build a list of currently selected states
-	        selectedRegions = [];
-	        for (var i in map.dataProvider.areas) {
-	            var area = map.dataProvider.areas[i];
-	            if (area.showAsSelected) {
-	                selectedRegions.push(area.title);
-	            }
-	        }
-	       // alert("Selected states:<br />" + (states.length ? states.join(", ") : "none"));
-	       // alert(document.getElementById("mapdiv")); 
-	      
-	        // var elem = $("#info")[0];
-	        // // alert(elem);
-	        // elem.innerHTML = "Selected Regions:<br />" + (selectedRegions.length ? selectedRegions.join(", ") : "none");
+	function refreshInfo(id){
+		var index= selectedRegions.indexOf(id);
+		if(index > -1){
+			selectedRegions.splice(index, 1);
+		}else{
+			selectedRegions.push(id);
+		}
+		//console.log(selectedRegions);
+		
 	}
+	
+	this.mapSelection = function(in_id){
+		 var id=in_id.split("_");
+	        id=id[0];
+	        	
+	       // console.log(id);
+	        if(selectedRegions.length == 1 && selectedRegions[0]==id)
+	        	return;
+	        
+	     	if(id=="30" || id=="123" || id=="169" || id=="190" || id=="207" || id=="206"){
+	     		var mapObject = map.getObjectById(id);
+	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       		 map.returnInitialColor(mapObject);
+	       		 
+	       		 mapObject = map.getObjectById(id+"_1");
+	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       		 map.returnInitialColor(mapObject);
+	       		 
+	       		 if(id=="190"){
+	       		 	 mapObject = map.getObjectById(id+"_2");
+	     			 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       			 map.returnInitialColor(mapObject);
+	       		 }	       		 
+	       		 
+	     	}else{
+	     		var mapObject = map.getObjectById(id);
+	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
+	       		 map.returnInitialColor(mapObject);
+	     	}
+	        
+	        refreshInfo(id);
+	       
+	};
 	
 	this.changeToNUTS1 =function() {
 		map.dataProvider = NUTS1;
 		map.validateData();
+		currentNUT=1;
 	};
 	
 	this.changeToNUTS2 =function() {
 		map.dataProvider = NUTS2;
 		map.validateData();
+		currentNUT=2;
 	};
 	
 	this.changeToNUTS3 =function() {
 		map.dataProvider = NUTS3;
 		map.validateData();
+		currentNUT=3;
 	};
 	
 	this.changeToCities =function() {
-		map.selectedObject = map.dataProvider;
+		//map.selectedObject = map.dataProvider;
 		map.dataProvider = cities;
 		map.validateData();
+		currentNUT=4;
 	};	
+	
+		
+	this.selectFromAnyRegion = function(regionType, id){
+		
+		if((regionType=="NUTS I " || regionType=="NUTS 2013 ") && currentNUT!=1){
+			compare_map.changeToNUTS1();
+		}else{
+			if(regionType=="NUTS II " && currentNUT!=2){
+				compare_map.changeToNUTS2();
+			}else{
+				if(regionType == "NUTS III " && currentNUT!=3){
+					compare_map.changeToNUTS3();
+				}else{
+					if(regionType == "Município " && currentNUT!=4){
+						compare_map.changeToCities();
+					}
+				}
+			}
+		}
+		if(id=="1"){
+			id="0";
+		}	
+		compare_map.mapSelection(id);
+	};
 	
 	
 	function handleGoHome() {
@@ -177,10 +233,13 @@ var compare_map= new function(){
 	        // deselect the area by assigning all of the dataProvider as selected object
 	        //map.selectedObject = map.dataProvider;
 	        
-	       
 	        var id=event.mapObject.id.split("_");
 	        id=id[0];
-	        console.log(id);
+	        	
+	       // console.log(id);
+	        if(selectedRegions.length == 1 && selectedRegions[0]==id)
+	        	return;
+	        
 	     	if(id=="30" || id=="123" || id=="169" || id=="190" || id=="207" || id=="206"){
 	     		var mapObject = map.getObjectById(id);
 	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
@@ -203,9 +262,11 @@ var compare_map= new function(){
 	       		 map.returnInitialColor(event.mapObject);
 	     	}
 	        
-	        refreshInfo();
+	        refreshInfo(id);
 	        
 	        //clickMapObject(mapObject) ccionar o click
 	        //zoomToSelectedObject(mapObject) zoom para o objecto seleccionado
 	});
 };
+//setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS II ","206"); }, 10000);
+
