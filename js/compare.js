@@ -125,6 +125,7 @@ var svg = d3.select("comparecontent").append("svg")
 	.style("margin-left", margin.left + "px")
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
 
 d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
@@ -133,7 +134,11 @@ d3.json("data/dataset.json", function(error, data1) {
         {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
-        if (res[1] === data1[i].ambito){ 
+        if (res[1] === data1[i].ambito ){ 
+            console.log(selectedNutsCompare);
+            var res1 = selectedNutsCompare.indexOf(i);
+            console.log("test: " + res1);
+            if (res){
 
             selectedNutsCompare.reverse();
             selectedNutsCompare.push(i);
@@ -149,7 +154,7 @@ d3.json("data/dataset.json", function(error, data1) {
             } 
             var elem = $("#selectedNUTSCompare")[0];
             elem.innerHTML = out;
-            }
+            }}
           }
           
         }
@@ -394,10 +399,11 @@ var elem = $("#selectedNUTSCompare").text();
 var selectedNutsCompare = elem.split(",");
 
 var elem1 = $("#selectedSearchBox").text();
-
 var res = elem1.split(":");
-
 console.log(res);
+
+elem = $("#selectedSearchBox")[0];
+elem.innerHTML = "";
 
 graphGanho(selectedNutsCompare, 1, res);
 //drawTimeLine();
