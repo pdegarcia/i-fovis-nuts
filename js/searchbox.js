@@ -107,7 +107,6 @@ $('#areas-query').typeahead({
            }
            var elem = $("#selectedSearchBox")[0];
             elem.innerHTML = item.display + ":" + item.group;
-
            $.getScript("js/compare.js");
            $('#result-container').text('');
 
