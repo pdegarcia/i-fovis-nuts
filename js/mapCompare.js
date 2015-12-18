@@ -192,6 +192,12 @@ var compare_map= new function(){
 	        if(selectedRegions.length == 1 && selectedRegions[0]==id)
 	        	return;
 	        
+	        for(var i=0; i<selectedRegions.length; i++){
+	        	if(selectedRegions[i]==id){
+	        		return;
+	        	}
+	        }
+	        
 	     	if(id=="30" || id=="123" || id=="169" || id=="190" || id=="207" || id=="206"){
 	     		var mapObject = map.getObjectById(id);
 	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
@@ -253,7 +259,6 @@ var compare_map= new function(){
 			}else{
 				if(regionType == "NUTS III " && currentNUT!=3){
 					compare_map.changeToNUTS3();
-					alert();
 				}else{
 					if(regionType == "Município " && currentNUT!=4){
 						compare_map.changeToCities();

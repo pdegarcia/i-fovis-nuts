@@ -135,6 +135,7 @@ d3.json("data/dataset.json", function(error, data1) {
         {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
+
         if (res[1] === data1[i].ambito ){ 
 			var iselementIngraph =false;
             if (!include(selectedNutsCompare, i)){
@@ -144,13 +145,23 @@ d3.json("data/dataset.json", function(error, data1) {
 					}
 				}
 				if(!iselementIngraph){
+					// if(selectedNutsCompare.length>5){
+						// compare_map.updateRejectedList(selectedNutsCompare[5]);
+					// }
+					
 	            selectedNutsCompare.reverse();
 	            selectedNutsCompare.push(i);
 	            selectedNutsCompare.reverse();
 	
-	            selectedNutsCompare.pop();
+				//update map
+				//FIXME change NUTS III to the "i" category
+				compare_map.selectFromAnyRegion("NUTS III ",""+i);
+				
+				
+				if(selectedNutsCompare.length>5)
+	            	selectedNutsCompare.pop();
 	
-	            //
+	           
 	            //selectedNutsCompare.pop(0);
 	            var out = selectedNutsCompare[0];
 	            for (var j=1; j<5; j++){
