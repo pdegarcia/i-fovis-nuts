@@ -1,10 +1,11 @@
+setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS I ","0"); }, 1000);
 function drawTimeLine(){
   // SLIDER
 $("#timeline").empty();
 var formatter = d3.format("d");
 var tickFormatter = function(d) {
   return formatter(d);
-}
+};
 
 var slider = d3.slider().min(2009).max(2013).ticks(5).tickFormat(tickFormatter);
 d3.select('#timeline').call(slider);

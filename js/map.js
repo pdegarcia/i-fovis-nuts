@@ -81,10 +81,10 @@ var explore_map = new function(){
 		getAreasFromMap : true,
 		zoomLevel: 1,
 		areas: [ {
-			id: "PT-L1",
+			id: "206",
 			groupId: "Lisboa"
 		},{
-			id: "PT-L2",
+			id: "206_1",
 			groupId: "Lisboa"	
 		}],
 	};
@@ -131,7 +131,7 @@ var explore_map = new function(){
 	
 	this.changeMapSelection = function(id){
 		//id must be string
-		console.log(id);
+		//console.log(id);
 		var mapObject = map.getObjectById(id);
 		map.clickMapObject(mapObject);	
 	};
@@ -221,7 +221,10 @@ var explore_map = new function(){
 	map.addListener("homeButtonClicked", handleGoHome);
 	map.addListener('selectedObjectChanged', function (event) {
 		if(map.selectedObject.title!=null){
-			mapselectedRegion = map.selectedObject.id;
+			var id= map.selectedObject.id;
+			id=id.split("_");
+	        id=id[0];
+			mapselectedRegion = id;
 			selectedRegionOrigin = currentNUT;
 			
 			var elem = $("#selectedNUTS")[0];
@@ -235,4 +238,4 @@ var explore_map = new function(){
 };
 // 
 // explore_map.changeMapSelection("PT-0");
-setTimeout(function(){ explore_map.changeMapSelection("0"); }, 1000);
+//setTimeout(function(){ explore_map.changeMapSelection("0"); }, 1000);
