@@ -135,19 +135,28 @@ d3.json("data/dataset.json", function(error, data1) {
   
         for (var i=0; i<data1.length; i++)
         {
-                if (res[0]==data1[i]._id ){
+        if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
         if (res[1] === data1[i].ambito){ 
             console.log("true match!!!! @ pos: " + i)
             //console.log(data1[i])
-            var temp
+            console.log(selectedNutsCompare);
+            selectedNutsCompare.reverse();
             selectedNutsCompare.push(i);
-            selectedNutsCompare.pop(0);
-            /*for (var j=1; j<5; j++){
-              temp = temp2;
-              temp2 = selectedNutsCompare[i];
-              selectedNutsCompare[i] = temp;
-            } */
+            selectedNutsCompare.reverse();
+            console.log(selectedNutsCompare);
+            //var insert = selectedNutsCompare.splice(0, 0, i);
+            selectedNutsCompare.pop();
+
+            //
+            //selectedNutsCompare.pop(0);
+            var out = selectedNutsCompare[0]
+            for (var j=1; j<5; j++){
+              out += "," + selectedNutsCompare[j]
+            } 
+            console.log(out);
+            var elem = $("#selectedNUTSCompare")[0];
+            elem.innerHTML = out;
             }
           }
           
