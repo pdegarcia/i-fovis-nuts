@@ -42,7 +42,6 @@ var chart = d3.select("explorecontent").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-console.log("recebi isto: " + id);
 // Get the data
 d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
@@ -157,8 +156,7 @@ var selectedNuts = elem;
 //Make selection to the map
  
 var elem1 = $("#selectedCat").text();
-var res = elem +":"+elem1;
-console.log(res);
+
 explore_map.changeSelectionFromAnyRegion(elem1, elem);
 
 elem = $("#selectedGanho").text();
