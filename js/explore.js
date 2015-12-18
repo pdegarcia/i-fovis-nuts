@@ -26,7 +26,10 @@ var yAxis = d3.svg.axis().scale(y)
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears); 
 
-// Define the line
+var formatMoney = d3.format("€");
+yAxis.tickFormat(formatMoney); 
+
+// Define the line  
 var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
   .y(function(d) { //console.log(y(d[1])+height + " ::::");
@@ -101,7 +104,7 @@ d3.json("data/dataset.json", function(error, data) {
   bar.append("title")
       .attr("dy", ".75em")
       .text(function(d,i) {   var dif = d[1]-data[0].selected[i][1]
-                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif) });
+                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif.toFixed(2) + "€" )});
 
   // Add the X Axis
   chart.append("g")
@@ -325,7 +328,7 @@ var line = d3.svg.line()
       .attr("dy", ".75em")
       .text(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
                           //console.log(dif);
-                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif) });
+                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif.toFixed(2)) });
 
   // Add the X Axis
   chart3.append("g")
