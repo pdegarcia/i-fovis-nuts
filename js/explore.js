@@ -151,9 +151,12 @@ $("explorecontent").empty();
 var elem = $("#selectedNUTS").text();
 var selectedNuts = elem;
 
-  var elem1 = $("#selectedCat").text();
-  var res = elem +":"+elem1;
-  console.log(res);
+//Make selection to the map
+ 
+var elem1 = $("#selectedCat").text();
+var res = elem +":"+elem1;
+console.log(res);
+explore_map.changeSelectionFromAnyRegion(elem1, elem);
 
 elem = $("#selectedGanho").text();
 var selectedGanho = elem;
@@ -181,7 +184,6 @@ var yAxis = d3.svg.axis().scale(y)
   
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears); 
-
 
 // Adds the svg canvas - SEGUNDO GRAFICO - PODER DE COMPRA PER CAPITA
 var chart2 = d3.select("explorecontent")

@@ -59,6 +59,7 @@ function checkIt(data) {
         var res = selectedValue.split(":");
         elem.innerHTML = res[0];
         
+        
         $.getScript("js/explore.js");
         //alert(makePie());
     };
