@@ -95,7 +95,7 @@ $('#areas-query').typeahead({
        "NUTS III": {
            data: names.nutsiii
        },
-       "Municípios": {
+       "Município": {
            data: names.municipios
        }
    },
@@ -104,7 +104,7 @@ $('#areas-query').typeahead({
            
         
 
-           var r = true;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
+           var r = false;//confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
            if (r == true) {
               alert(item.href);
            }

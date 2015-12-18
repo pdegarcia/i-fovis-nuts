@@ -80,7 +80,7 @@ function animate(){
 
 }
 
-function graphGanho(selectedNutsCompare, id){
+function graphGanho(selectedNutsCompare, id, res){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -131,6 +131,24 @@ var svg = d3.select("comparecontent").append("svg")
 
 d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
+  
+        for (var i=0; i<data1.length; i++)
+        {
+                if (res[0]==data1[i]._id ){
+        console.log("half match: " + data1[i].ambito + ":" + res[1]);
+        if (res[1] === data1[i].ambito){ 
+            console.log("true match!!!! @ pos: " + i)
+            console.log(data1[i])
+            var temp;
+            selectedNutsCompare[0] = i;
+            //for (var j=1; j<selectedNutsCompare.length; j++){
+              
+            //} 
+            }
+          }
+          
+        }
+        
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
@@ -147,6 +165,8 @@ d3.json("data/dataset.json", function(error, data1) {
       else if(id===5){ d.selected = d.escolaridadeIgualSuperior }
       else if(id===6){ d.selected = d.consultas }
       
+
+
       //console.log(d);
   });
   
@@ -155,7 +175,7 @@ d3.json("data/dataset.json", function(error, data1) {
   dataNovo.push(data1[selectedNutsCompare[j]])
    
   }
-  console.log(dataNovo);
+  //console.log(dataNovo);
 
 	x.domain([start_year, end_year]);
   
@@ -176,14 +196,14 @@ d3.json("data/dataset.json", function(error, data1) {
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].ganho + " "+ data1[j].selected);
+    console.log(":::::::::>>>>>> "+ selectedNutsCompare);
 		var text = g.selectAll("text")
 			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
+			.domain([400, d3.max(data1[0].selected, function(d) { return d[1]; })+100])
       //.domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
 			.range([5, 18]);
 
@@ -199,7 +219,7 @@ d3.json("data/dataset.json", function(error, data1) {
 			.attr("class","value")
 			.text(function(d){ return d[1]; })
 			.style("fill", function(d) { return c(j); })
-			.style("display","block");
+			.style("display","none");
       
 		g.append("text")
 			.attr("y", j*50+25)
@@ -369,9 +389,8 @@ d3.json("data/dataset.json", function(error, data1) {
 $("comparecontent").empty();
 
 var elem = $("#selectedNUTSCompare").text();
-var selectedNutsCompare = elem;
 
-console.log(elem);
+var selectedNutsCompare = elem.split(",");
 
 var elem1 = $("#selectedSearchBox").text();
 
@@ -379,8 +398,8 @@ var res = elem1.split(":");
 
 console.log(res);
 
-graphGanho(selectedNutsCompare, 1);
-drawTimeLine();
+graphGanho(selectedNutsCompare, 1, res);
+//drawTimeLine();
 
 
   /* HANDLERS BOTOES */

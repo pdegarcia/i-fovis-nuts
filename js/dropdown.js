@@ -2,6 +2,9 @@
 
 function checkIt(data) {
     data = data.document.nuts;
+    
+    var elem = $("#selectedNUTS").text();
+    var selectedNuts = elem;    
 
     //var regexp = new RegExp(',');
     var nutsByName = d3.nest()

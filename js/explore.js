@@ -26,7 +26,10 @@ var yAxis = d3.svg.axis().scale(y)
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears); 
 
-// Define the line
+var formatMoney = d3.format("€");
+yAxis.tickFormat(formatMoney); 
+
+// Define the line  
 var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
   .y(function(d) { //console.log(y(d[1])+height + " ::::");
@@ -39,7 +42,6 @@ var chart = d3.select("explorecontent").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-console.log("recebi isto: " + id);
 // Get the data
 d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
@@ -82,14 +84,14 @@ d3.json("data/dataset.json", function(error, data) {
   //bars
   
   var barWidth = 10;
-
+  
+  
   var bar = chart.selectAll("g")
       .data(data[selectedNuts].selected)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
                                                         // i * barWidth
-                                                        
-                                                       
+                                                                                                       
   bar.append("rect")
       .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
@@ -100,9 +102,8 @@ d3.json("data/dataset.json", function(error, data) {
 
   bar.append("title")
       .attr("dy", ".75em")
-      .text(function(d) {   console.log(d)
-                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€") });
-
+      .text(function(d,i) {   var dif = d[1]-data[0].selected[i][1]
+                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif.toFixed(2) + "€" )});
 
   // Add the X Axis
   chart.append("g")
@@ -155,8 +156,7 @@ var selectedNuts = elem;
 //Make selection to the map
  
 var elem1 = $("#selectedCat").text();
-var res = elem +":"+elem1;
-console.log(res);
+
 explore_map.changeSelectionFromAnyRegion(elem1, elem);
 
 elem = $("#selectedGanho").text();
@@ -326,7 +326,7 @@ var line = d3.svg.line()
       .attr("dy", ".75em")
       .text(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
                           //console.log(dif);
-                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif) });
+                          return (data[selectedNuts]._id + ": " + d[1] + " por habitante | Diferença: " + dif.toFixed(2)) });
 
   // Add the X Axis
   chart3.append("g")

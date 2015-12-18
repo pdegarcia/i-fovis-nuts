@@ -223,6 +223,11 @@ var explore_map = new function(){
 		if(map.selectedObject.title!=null){
 			mapselectedRegion = map.selectedObject.id;
 			selectedRegionOrigin = currentNUT;
+			
+			var elem = $("#selectedNUTS")[0];
+        	elem.innerHTML = mapselectedRegion;
+        
+        	$.getScript("js/explore.js");
 		}
 		//refreshInfo();
 	});
