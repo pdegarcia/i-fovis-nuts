@@ -175,6 +175,13 @@ var compare_map= new function(){
 		//console.log(selectedRegions);
 		
 	}
+	this.updateRejectedList = function(elem){
+		removedRegion.push(elem);
+	};
+	
+	this.getRejectedList = function(){
+		return removedRegion;
+	};
 	
 	this.mapSelection = function(rid){
 		
