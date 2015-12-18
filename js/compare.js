@@ -154,8 +154,10 @@ d3.json("data/dataset.json", function(error, data1) {
 	            selectedNutsCompare.reverse();
 	
 				//update map
-        console.log("___" + data1[i].ambito)
+        		console.log(data1[i].ambito+"___");
 				//FIXME change NUTS III to the "i" category
+				// compare_map.changeToCities();
+				
 				compare_map.selectFromAnyRegion(data1[i].ambito + " ",""+i);
 				
 				

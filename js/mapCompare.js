@@ -99,7 +99,7 @@ var compare_map= new function(){
 		},
 		fitMapToContainer: true,
 		
-		dataProvider : NUTS3,
+		dataProvider : cities,
 		smallMap : {},
 		"responsive" : {
 			"enabled" : true
@@ -243,7 +243,7 @@ var compare_map= new function(){
 	};
 	
 	this.changeToCities =function() {
-		//map.selectedObject = map.dataProvider;
+		map.selectedObject = map.dataProvider;
 		map.dataProvider = cities;
 		map.validateData();
 		currentNUT=4;
@@ -269,17 +269,17 @@ var compare_map= new function(){
 		if(id=="1"){
 			id="0";
 		}	
-		compare_map.mapSelection(id);
+		setTimeout(function(){ compare_map.mapSelection(id); }, 1000);
 	};
 	
 	this.init = function(){
 		if(firstTime){
 			
-			compare_map.mapSelection("30"); 
-		    compare_map.mapSelection("87");
-			compare_map.mapSelection("207"); 
-			compare_map.mapSelection("275"); 
-			compare_map.mapSelection("291");
+			compare_map.mapSelection("213"); 
+		    compare_map.mapSelection("38");
+			compare_map.mapSelection("296"); 
+			compare_map.mapSelection("245"); 
+			compare_map.mapSelection("115");
 			firstTime=false;
 		}
 	};
