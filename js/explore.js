@@ -82,14 +82,14 @@ d3.json("data/dataset.json", function(error, data) {
   //bars
   
   var barWidth = 10;
-
+  
+  
   var bar = chart.selectAll("g")
       .data(data[selectedNuts].selected)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
                                                         // i * barWidth
-                                                        
-                                                       
+                                                                                                       
   bar.append("rect")
       .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
@@ -100,9 +100,8 @@ d3.json("data/dataset.json", function(error, data) {
 
   bar.append("title")
       .attr("dy", ".75em")
-      .text(function(d) {   console.log(d)
-                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€") });
-
+      .text(function(d,i) {   var dif = d[1]-data[0].selected[i][1]
+                              return (data[selectedNuts]._id + ": " + d[0] + " : " + d[1] +"€ | Diferença: " + dif) });
 
   // Add the X Axis
   chart.append("g")
