@@ -47,7 +47,7 @@ function checkIt(data) {
 
         //making Pie
         function makePie() {
-        return ("you selected: " + " " + selection.text());
+        return ("you selected: " + " " + selection.html());
         };
         var elem = $("#selectedNUTS")[0];
         elem.innerHTML = selectedIndex;

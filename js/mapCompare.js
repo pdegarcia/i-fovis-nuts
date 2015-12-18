@@ -122,10 +122,27 @@ var compare_map= new function(){
 	
 	function refreshInfo(id){
 		var index= selectedRegions.indexOf(id);
+		var elem = $("#selectedNUTSCompare")[0];
+			var txt=elem.innerHTML;
+			var selection= txt.split(",");
+			console.log(selection);
+		
 		if(index > -1){
 			selectedRegions.splice(index, 1);
 		}else{
+			
+            //elem.innerHTML = id;
 			selectedRegions.push(id);
+			
+			for(var i=0; i<5; i++){
+				if(selection[i]==id)
+					return;
+			}
+			selection.unshift(id);
+			selection.pop();
+			
+			console.log(selection);
+			
 		}
 		//console.log(selectedRegions);
 		
