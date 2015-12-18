@@ -1,6 +1,7 @@
 var compare_map= new function(){
 	var selectedRegions=[];
 	var currentNUT=1;
+	var firstTime=true;
 	var cities = {
 		map : "portugalLow",
 		getAreasFromMap : true,
@@ -97,7 +98,7 @@ var compare_map= new function(){
 		},
 		fitMapToContainer: true,
 		
-		dataProvider : NUTS1,
+		dataProvider : NUTS3,
 		smallMap : {},
 		"responsive" : {
 			"enabled" : true
@@ -129,39 +130,44 @@ var compare_map= new function(){
 		
 		if(index > -1){
 			selectedRegions.splice(index, 1);
-			for(var i=0; i<selection.length; i++){
-				if(selection[i]==id){
-					selection.splice(i, 1);
-					elem.innerHTML=selection;
-					$.getScript("js/compare.js");
+			if(!firstTime){
+				for(var i=0; i<selection.length; i++){
+					if(selection[i]==id){
+						selection.splice(i, 1);
+						elem.innerHTML=selection;
+						$.getScript("js/compare.js");
+					}
+					
 				}
-				
 			}
 			
 		}else{
 			
             //elem.innerHTML = id;
 			selectedRegions.push(id);
-			
-			for(var i=0; i<selection.length; i++){
-				if(selection[i]==id)
-					return;
+			console.log(firstTime);
+			if(!firstTime){
+				for(var i=0; i<selection.length; i++){
+					if(selection[i]==id)
+						return;
+				}
+				selection.unshift(id);
+				if(selection.length>5)
+					selection.pop();
+				
+				//console.log(selection);
+				elem.innerHTML=selection;
+				$.getScript("js/compare.js");
 			}
-			selection.unshift(id);
-			if(selection.length>5)
-				selection.pop();
-			
-			//console.log(selection);
-			elem.innerHTML=selection;
-			$.getScript("js/compare.js");
 			
 		}
 		//console.log(selectedRegions);
 		
 	}
 	
-	this.mapSelection = function(in_id){
-		 var id=in_id.split("_");
+	this.mapSelection = function(rid){
+		
+		 var id=rid.split("_");
 	        id=id[0];
 	        	
 	       // console.log(id);
@@ -185,6 +191,7 @@ var compare_map= new function(){
 	       		 
 	     	}else{
 	     		var mapObject = map.getObjectById(id);
+	     		console.log(mapObject);
 	     		 mapObject.showAsSelected = !mapObject.showAsSelected;
 	       		 map.returnInitialColor(mapObject);
 	     	}
@@ -217,7 +224,6 @@ var compare_map= new function(){
 		map.validateData();
 		currentNUT=4;
 	};	
-	
 		
 	this.selectFromAnyRegion = function(regionType, id){
 		
@@ -229,6 +235,7 @@ var compare_map= new function(){
 			}else{
 				if(regionType == "NUTS III " && currentNUT!=3){
 					compare_map.changeToNUTS3();
+					alert();
 				}else{
 					if(regionType == "Município " && currentNUT!=4){
 						compare_map.changeToCities();
@@ -240,6 +247,18 @@ var compare_map= new function(){
 			id="0";
 		}	
 		compare_map.mapSelection(id);
+	};
+	
+	this.init = function(){
+		if(firstTime){
+			
+			compare_map.mapSelection("30"); 
+		    compare_map.mapSelection("87");
+			compare_map.mapSelection("207"); 
+			compare_map.mapSelection("275"); 
+			compare_map.mapSelection("291");
+			firstTime=false;
+		}
 	};
 	
 	
@@ -297,6 +316,6 @@ var compare_map= new function(){
 	        //zoomToSelectedObject(mapObject) zoom para o objecto seleccionado
 	});
 };
-setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS I ","0"); }, 1000);
+
 //setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS II ","206"); }, 10000);
 
