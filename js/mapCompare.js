@@ -125,23 +125,35 @@ var compare_map= new function(){
 		var elem = $("#selectedNUTSCompare")[0];
 			var txt=elem.innerHTML;
 			var selection= txt.split(",");
-			console.log(selection);
+			//console.log(selection);
 		
 		if(index > -1){
 			selectedRegions.splice(index, 1);
+			for(var i=0; i<selection.length; i++){
+				if(selection[i]==id){
+					selection.splice(i, 1);
+					elem.innerHTML=selection;
+					$.getScript("js/compare.js");
+				}
+				
+			}
+			
 		}else{
 			
             //elem.innerHTML = id;
 			selectedRegions.push(id);
 			
-			for(var i=0; i<5; i++){
+			for(var i=0; i<selection.length; i++){
 				if(selection[i]==id)
 					return;
 			}
 			selection.unshift(id);
-			selection.pop();
+			if(selection.length>5)
+				selection.pop();
 			
-			console.log(selection);
+			//console.log(selection);
+			elem.innerHTML=selection;
+			$.getScript("js/compare.js");
 			
 		}
 		//console.log(selectedRegions);
@@ -285,5 +297,6 @@ var compare_map= new function(){
 	        //zoomToSelectedObject(mapObject) zoom para o objecto seleccionado
 	});
 };
+setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS I ","0"); }, 1000);
 //setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS II ","206"); }, 10000);
 

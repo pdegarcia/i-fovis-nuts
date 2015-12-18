@@ -1,5 +1,3 @@
-setTimeout(function(){ compare_map.selectFromAnyRegion("NUTS I ","0"); }, 1000);
-
 function drawTimeLine(){
   // SLIDER
 $("#timeline").empty();
