@@ -138,14 +138,11 @@ d3.json("data/dataset.json", function(error, data1) {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
         if (res[1] === data1[i].ambito){ 
-            console.log("true match!!!! @ pos: " + i)
-            //console.log(data1[i])
-            console.log(selectedNutsCompare);
+
             selectedNutsCompare.reverse();
             selectedNutsCompare.push(i);
             selectedNutsCompare.reverse();
-            console.log(selectedNutsCompare);
-            //var insert = selectedNutsCompare.splice(0, 0, i);
+
             selectedNutsCompare.pop();
 
             //
@@ -154,7 +151,6 @@ d3.json("data/dataset.json", function(error, data1) {
             for (var j=1; j<5; j++){
               out += "," + selectedNutsCompare[j]
             } 
-            console.log(out);
             var elem = $("#selectedNUTSCompare")[0];
             elem.innerHTML = out;
             }
@@ -210,7 +206,6 @@ d3.json("data/dataset.json", function(error, data1) {
 			.enter()
 			.append("circle");
 
-    console.log(":::::::::>>>>>> "+ selectedNutsCompare);
 		var text = g.selectAll("text")
 			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
@@ -267,7 +262,7 @@ d3.json("data/dataset.json", function(error, data1) {
 	}
 })}
 
-function graphPoderCompraConsultas(selectedNutsCompare){
+function graphPoderCompra(selectedNutsCompare){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -358,8 +353,8 @@ d3.json("data/dataset.json", function(error, data1) {
 
 		var rScale = d3.scale.linear()
 			//.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
-      .domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
-			.range([3, 18]);
+      .domain([50, 250])
+			.range([5, 18]);
 
 		circles
 			.attr("cx", function(d, i) { return xScale(d[0]); })
@@ -373,7 +368,7 @@ d3.json("data/dataset.json", function(error, data1) {
 			.attr("class","value")
 			.text(function(d){ return d[1]; })
 			.style("fill", function(d) { return c(j); })
-			.style("display","block");
+			.style("display","none");
       
 		g.append("text")
 			.attr("y", j*50+25)
@@ -468,7 +463,7 @@ graphGanho(selectedNutsCompare, 1, res);
     .on("click", function () {
       console.log("Poder de Compra per capita Pressed");
       $("comparecontent").empty();
-      graphPoderCompraConsultas(selectedNutsCompare);
+      graphPoderCompra(selectedNutsCompare);
       drawTimeLine();
       //para cada NUT seleccionado, apresentar Poder de compra
     });

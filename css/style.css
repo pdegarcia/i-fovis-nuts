@@ -244,6 +244,56 @@ div.tabs div h2 {
 	overflow: auto;
 	z-index: 100;
 }
+.selectedGanho {
+	font-family: Arial;
+	font-size: 12px;
+	position: absolute;
+	top: 50;
+	bottom: auto;
+	left: auto;
+	right: 100%;
+	width: 10%;
+	height: 10%;
+	padding: 7px;
+	background-color: #666;
+	opacity: 0.5;
+	overflow: auto;
+	z-index: 100;
+}
+
+.selectedSearchBox{
+	font-family: Arial;
+	font-size: 12px;
+	position: absolute;
+	top: 50;
+	bottom: auto;
+	left: auto;
+	right: 100%;
+	width: 10%;
+	height: 10%;
+	padding: 7px;
+	background-color: #666;
+	opacity: 0.5;
+	overflow: auto;
+	z-index: 100;
+}
+
+.selectedNUTSCompare {
+	font-family: Arial;
+	font-size: 12px;
+	position: absolute;
+	top: 50;
+	bottom: auto;
+	left: auto;
+	right: 100%;
+	width: 10%;
+	height: 10%;
+	padding: 7px;
+	background-color: #666;
+	opacity: 0.5;
+	overflow: auto;
+	z-index: 100;
+}
 
 .selectedCat {
 	font-family: Arial;
