@@ -135,19 +135,23 @@ d3.json("data/dataset.json", function(error, data1) {
         for (var i=0; i<data1.length; i++)
         {
                 if (res[0]==data1[i]._id ){
-        console.log("half match: " + data1[i].ambito + ":" + res[1]);
+        //console.log("half match: " + data1[i].ambito + ":" + res[1]);
         if (res[1] === data1[i].ambito){ 
             console.log("true match!!!! @ pos: " + i)
-            console.log(data1[i])
-            var temp;
-            selectedNutsCompare[0] = i;
-            //for (var j=1; j<selectedNutsCompare.length; j++){
-              
-            //} 
+            //console.log(data1[i])
+            var temp
+            selectedNutsCompare.push(i);
+            selectedNutsCompare.pop(0);
+            /*for (var j=1; j<5; j++){
+              temp = temp2;
+              temp2 = selectedNutsCompare[i];
+              selectedNutsCompare[i] = temp;
+            } */
             }
           }
           
         }
+        
         
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]

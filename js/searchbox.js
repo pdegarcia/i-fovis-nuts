@@ -76,7 +76,6 @@ $('#areas-query').typeahead({
        );
 
        return $.map(sortGroup, function (val, i) {
-           console.log(val + " : " + i);
            return val.group
        });
    },
@@ -111,7 +110,7 @@ $('#areas-query').typeahead({
            var elem = $("#selectedSearchBox")[0];
             elem.innerHTML = item.display + ":" + item.group;
             
-            console.log(item);
+            //console.log(item);
             
            $.getScript("js/compare.js");
            $('#result-container').text('');
