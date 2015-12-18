@@ -117,7 +117,9 @@ var xAxis = d3.svg.axis()
 var formatYears = d3.format("0000");
 xAxis.tickFormat(formatYears);
 
-//var escolaridades = ["Total","< Básico","= Básico","= Secundário","= Superior"]
+function include(arr,obj) {
+    return (arr.indexOf(obj) != -1);
+}
 
 var svg = d3.select("comparecontent").append("svg")
 	.attr("width", width + margin.left + margin.right)
@@ -135,10 +137,8 @@ d3.json("data/dataset.json", function(error, data1) {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
         if (res[1] === data1[i].ambito ){ 
-            console.log(selectedNutsCompare);
-            var res1 = selectedNutsCompare.indexOf(i);
-            console.log("test: " + res1);
-            if (res){
+
+            if (!include(selectedNutsCompare, i)){
 
             selectedNutsCompare.reverse();
             selectedNutsCompare.push(i);
