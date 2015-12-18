@@ -131,6 +131,24 @@ var svg = d3.select("comparecontent").append("svg")
 
 d3.json("data/dataset.json", function(error, data1) {
   data1 = data1.document.nuts;
+  
+        for (var i=0; i<data1.length; i++)
+        {
+                if (res[0]==data1[i]._id ){
+        console.log("half match: " + data1[i].ambito + ":" + res[1]);
+        if (res[1] === data1[i].ambito){ 
+            console.log("true match!!!! @ pos: " + i)
+            console.log(data1[i])
+            var temp;
+            selectedNutsCompare[0] = i;
+            //for (var j=1; j<selectedNutsCompare.length; j++){
+              
+            //} 
+            }
+          }
+          
+        }
+        
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
@@ -147,9 +165,8 @@ d3.json("data/dataset.json", function(error, data1) {
       else if(id===5){ d.selected = d.escolaridadeIgualSuperior }
       else if(id===6){ d.selected = d.consultas }
       
-      if (res[0]==d._id){
-        console.log("half match");
-      }
+
+
       //console.log(d);
   });
   
@@ -382,7 +399,7 @@ var res = elem1.split(":");
 console.log(res);
 
 graphGanho(selectedNutsCompare, 1, res);
-drawTimeLine();
+//drawTimeLine();
 
 
   /* HANDLERS BOTOES */
