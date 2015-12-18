@@ -1,5 +1,6 @@
 var compare_map= new function(){
 	var selectedRegions=[];
+	var removedRegion=[];
 	var currentNUT=1;
 	var firstTime=true;
 	var cities = {
@@ -134,6 +135,12 @@ var compare_map= new function(){
 				for(var i=0; i<selection.length; i++){
 					if(selection[i]==id){
 						selection.splice(i, 1);
+						
+						if(removedRegion.length>0){
+							selection.push(removedRegion[0]);
+							removedRegion.splice(0,1);
+						}
+						
 						elem.innerHTML=selection;
 						$.getScript("js/compare.js");
 					}
@@ -152,8 +159,12 @@ var compare_map= new function(){
 						return;
 				}
 				selection.unshift(id);
-				if(selection.length>5)
+				if(selection.length>5){
+					removedRegion.push(selection[5]);	
+					console.log(removedRegion)	;		
 					selection.pop();
+				}
+					
 				
 				//console.log(selection);
 				elem.innerHTML=selection;
