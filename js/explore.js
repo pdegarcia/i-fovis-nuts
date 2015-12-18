@@ -22,19 +22,19 @@ var xAxis = d3.svg.axis().scale(x)
 
 var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(6);
-  
+
 var formatYears = d3.format("0000");
-xAxis.tickFormat(formatYears); 
+xAxis.tickFormat(formatYears);
 
 var formatMoney = d3.format("€");
-yAxis.tickFormat(formatMoney); 
+yAxis.tickFormat(formatMoney);
 
-// Define the line  
+// Define the line
 var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
   .y(function(d) { //console.log(y(d[1])+height + " ::::");
   return y(d[1]); });
-  
+
 var medianline = d3.svg.line()
   .x(function(d, i) { return i*20; })
   .y(0);
@@ -49,27 +49,27 @@ var chart = d3.select("explorecontent").append("svg")
 // Get the data
 d3.json("data/dataset.json", function(error, data) {
   data = data.document.nuts;
-  data.forEach(function(d) {     
+  data.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
       d.escolaridadeIgualBasico = [[2009,d.igualBasico.ano2009], [2010,d.igualBasico.ano2010], [2011,d.igualBasico.ano2011], [2012,d.igualBasico.ano2012], [2013,d.igualBasico.ano2013]]
       d.escolaridadeIgualSecundario = [[2009,d.igualSecundario.ano2009], [2010,d.igualSecundario.ano2010], [2011,d.igualSecundario.ano2011], [2012,d.igualSecundario.ano2012], [2013,d.igualSecundario.ano2013]]
       d.escolaridadeIgualSuperior = [[2009,d.igualSuperior.ano2009], [2010,d.igualSuperior.ano2010], [2011,d.igualSuperior.ano2011], [2012,d.igualSuperior.ano2012], [2013,d.igualSuperior.ano2013]]
-      
+
 
       if(id==1){ d.selected = d.escolaridadeTotal }
       else if(id==2){ d.selected = d.escolaridadeMenorBasico }
       else if(id==3){ d.selected = d.escolaridadeIgualBasico }
       else if(id==4){ d.selected = d.escolaridadeIgualSecundario }
       else if(id==5){ d.selected = d.escolaridadeIgualSuperior }
-      
-      
+
+
   });
   // Scale the range of the data
   x.domain([2009,d3.max(data[selectedNuts].selected, function(d) { return d[0]; })]);
   y.domain([0, 3000]);
 
-  // Add the valueline of Portugal median  
+  // Add the valueline of Portugal median
   chart.append("path")
     .attr("class", "line")
     .attr("d", valueline(data[0].selected))
@@ -77,8 +77,8 @@ d3.json("data/dataset.json", function(error, data) {
     .style("stroke-linecap","round")
     .style("stroke-width","1")
     .style("stroke-dasharray","5,5");
-    
-    
+
+
   chart.append("path")
     .attr("class", "line")
     .attr("d", valueline(data[0].selected))
@@ -93,14 +93,14 @@ d3.json("data/dataset.json", function(error, data) {
     .attr("d", valueline(data[selectedNuts].selected));
 
   //bars
-  
+
   var barWidth = 10;
 
   var bar = chart.selectAll("g")
       .data(data[selectedNuts].selected)
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + x(d[0]) + ",0)"; });
-                                                    
+
   /* Initialize tooltip */
   tip = d3.tip().attr('class', 'd3-tip')
               .html(function(d, i) { var dif = d[1]-data[0].selected[i][1]
@@ -108,8 +108,8 @@ d3.json("data/dataset.json", function(error, data) {
 
   /* Invoke the tip in the context of your visualization */
   chart.call(tip)
-                                                   
-                                                                                                       
+
+
   bar.append("rect")
       .attr("y", function(d) { return y(d[1])-5; })
       .attr("fill", "steelblue")
@@ -132,9 +132,9 @@ d3.json("data/dataset.json", function(error, data) {
     .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")
-    .style("font-size", "16px")
+    .style("font-size", "14px")
     .style("font-weight", "bold")
-    .text("Ganho Total - Todas as Escolaridades");
+    .text("Ganho Mensal de Trabalhadores por Conta de Outrem");
 })}
 
 
@@ -173,9 +173,9 @@ var xAxis = d3.svg.axis().scale(x)
 
 var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(5);
-  
+
 var formatYears = d3.format("0000");
-xAxis.tickFormat(formatYears); 
+xAxis.tickFormat(formatYears);
 
 // Adds the svg canvas - SEGUNDO GRAFICO - PODER DE COMPRA PER CAPITA
 var chart2 = d3.select("explorecontent")
@@ -200,8 +200,8 @@ var line1 = d3.svg.line()
  			// assign the X function to plot our line as we wish
  			.x(function(d) { return x(d[0]);	})
  			.y(function(d) { return y(d[1]); })
-       
-  // Add the valueline of Portugal median  
+
+  // Add the valueline of Portugal median
   chart2.append("path")
     .attr("class", "line")
     .attr("d", line1(data[0].poderCompra))
@@ -262,7 +262,7 @@ var line = d3.svg.line()
  			// assign the X function to plot our line as we wish
  			.x(function(d) { return x(d[0]); })
  			.y(function(d) { return y(d[1]); })
-  // Add the valueline of Portugal median  
+  // Add the valueline of Portugal median
   chart3.append("path")
     .attr("class", "line")
     .attr("d", line(data[0].consultas))
@@ -270,12 +270,12 @@ var line = d3.svg.line()
     .style("stroke-linecap","round")
     .style("stroke-width","1")
     .style("stroke-dasharray","5,5");
-       
+
   // Add the valueline path.
   chart3.append("path")
     .attr("class", "line")
     .attr("d", line(data[selectedNuts].consultas));
-    
+
   /* Initialize tooltip */
   tip = d3.tip().attr('class', 'd3-tip')
               .html(function(d, i) { var dif = d[1]-data[0].consultas[i][1]
@@ -283,7 +283,7 @@ var line = d3.svg.line()
 
   /* Invoke the tip in the context of your visualization */
   chart3.call(tip)
-    
+
   //bars
   var barWidth = 10;
 
