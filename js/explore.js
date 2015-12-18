@@ -34,6 +34,10 @@ var valueline = d3.svg.line()
   .x(function(d) { return x(d[0]); })
   .y(function(d) { //console.log(y(d[1])+height + " ::::");
   return y(d[1]); });
+  
+var medianline = d3.svg.line()
+  .x(function(d, i) { return i*20; })
+  .y(0);
 
 // Adds the svg canvas - PRIMEIRO GRAFICO - GANHO POR NIVEL DE ESCOLARIDADE
 var chart = d3.select("explorecontent").append("svg")
@@ -66,6 +70,15 @@ d3.json("data/dataset.json", function(error, data) {
   y.domain([0, 3000]);
 
   // Add the valueline of Portugal median  
+  chart.append("path")
+    .attr("class", "line")
+    .attr("d", valueline(data[0].selected))
+    .style("stroke","red")
+    .style("stroke-linecap","round")
+    .style("stroke-width","1")
+    .style("stroke-dasharray","5,5");
+    
+    
   chart.append("path")
     .attr("class", "line")
     .attr("d", valueline(data[0].selected))

@@ -186,6 +186,22 @@ d3.json("data/dataset.json", function(error, data1) {
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + 0 + ")")
 		.call(xAxis);
+    
+  /* Initialize tooltip */
+  tip = d3.tip().attr('class', 'd3-tip')
+              .html(function(d, i) { var dif = d[1]-data1[0].selected[i][1]
+                                  console.log(d);
+                                  if (id==6) {
+                                    return (d[0] + " : " + d[1] +" | Diferença: " + dif.toFixed(2) + "");
+                                  }
+                                  else { 
+                                    return (d[0] + " : " + d[1] +"€ | Diferença: " + dif.toFixed(2) + "€"); }
+                                  });
+              
+  /* Invoke the tip in the context of your visualization */
+  svg.call(tip)
+
+      
 
 	for (var j = 0; j < selectedNutsCompare.length; j++) {
 		var g = svg.append("g").attr("class","journal");
@@ -208,7 +224,9 @@ d3.json("data/dataset.json", function(error, data1) {
 			.attr("cx", function(d, i) { return xScale(d[0]); })
 			.attr("cy", j*50+20)
 			.attr("r", function(d) { return rScale(d[1]); })
-			.style("fill", function(d) { return c(j); });
+			.style("fill", function(d) { return c(j); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);;
 
 		text
 			.attr("y", j*50+20)
