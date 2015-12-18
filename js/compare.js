@@ -155,7 +155,7 @@ d3.json("data/dataset.json", function(error, data1) {
   dataNovo.push(data1[selectedNutsCompare[j]])
    
   }
-  console.log(dataNovo);
+  //console.log(dataNovo);
 
 	x.domain([start_year, end_year]);
   
@@ -176,14 +176,14 @@ d3.json("data/dataset.json", function(error, data1) {
 			.enter()
 			.append("circle");
 
-    console.log(data1[j].ganho + " "+ data1[j].selected);
+    console.log(":::::::::>>>>>> "+ selectedNutsCompare);
 		var text = g.selectAll("text")
 			.data(data1[selectedNutsCompare[j]].selected)
 			.enter()
 			.append("text");
 
 		var rScale = d3.scale.linear()
-			.domain([d3.min(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; }), d3.max(data1[selectedNutsCompare[j]].selected, function(d) { return d[1]; })])
+			.domain([400, d3.max(data1[0].selected, function(d) { return d[1]; })+100])
       //.domain([d3.min(data1[0].selected, function(d) { return d[1]; }), d3.max(data1[0].selected, function(d) { return d[1]; })])
 			.range([5, 18]);
 
@@ -199,7 +199,7 @@ d3.json("data/dataset.json", function(error, data1) {
 			.attr("class","value")
 			.text(function(d){ return d[1]; })
 			.style("fill", function(d) { return c(j); })
-			.style("display","block");
+			.style("display","none");
       
 		g.append("text")
 			.attr("y", j*50+25)
@@ -369,9 +369,8 @@ d3.json("data/dataset.json", function(error, data1) {
 $("comparecontent").empty();
 
 var elem = $("#selectedNUTSCompare").text();
-var selectedNutsCompare = elem;
 
-console.log(elem);
+var selectedNutsCompare = elem.split(",");
 
 var elem1 = $("#selectedSearchBox").text();
 
