@@ -141,7 +141,12 @@ var compare_map= new function(){
 			selection.unshift(id);
 			selection.pop();
 			
+			elem = $("#selectedNUTSCompare")[0];
+            elem.innerHTML = selection;
+			
 			console.log(selection);
+			
+			$.getScript("js/compare.js");
 			
 		}
 		//console.log(selectedRegions);
