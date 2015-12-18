@@ -135,32 +135,6 @@ d3.json("data/dataset.json", function(error, data1) {
         {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
-<<<<<<< HEAD
-        if (res[1] === data1[i].ambito ){
-
-            if (!include(selectedNutsCompare, i)){
-
-            selectedNutsCompare.reverse();
-            selectedNutsCompare.push(i);
-            selectedNutsCompare.reverse();
-
-            selectedNutsCompare.pop();
-
-            //
-            //selectedNutsCompare.pop(0);
-            var out = selectedNutsCompare[0]
-            for (var j=1; j<5; j++){
-              out += "," + selectedNutsCompare[j]
-            }
-            var elem = $("#selectedNUTSCompare")[0];
-            elem.innerHTML = out;
-            }}
-          }
-
-        }
-
-
-=======
         if (res[1] === data1[i].ambito ){ 
 			var iselementIngraph =false;
             if (!include(selectedNutsCompare, i)){
@@ -191,10 +165,6 @@ d3.json("data/dataset.json", function(error, data1) {
        }
        }
           
-        
-        
-        
->>>>>>> fe1916b4c401e4671e57adfae8e3b7fa98d20092
   data1.forEach(function(d) {
       d.escolaridadeTotal = [[2009,d.ganhoTotal.ano2009], [2010,d.ganhoTotal.ano2010], [2011,d.ganhoTotal.ano2011], [2012,d.ganhoTotal.ano2012], [2013,d.ganhoTotal.ano2013]]
       d.escolaridadeMenorBasico = [[2009,d.inferiorBasico.ano2009], [2010,d.inferiorBasico.ano2010], [2011,d.inferiorBasico.ano2011], [2012,d.inferiorBasico.ano2012], [2013,d.inferiorBasico.ano2013]]
