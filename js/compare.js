@@ -80,7 +80,7 @@ function animate(){
 
 }
 
-function graphGanho(selectedNutsCompare, id){
+function graphGanho(selectedNutsCompare, id, res){
   
 function truncate(str, maxLength, suffix) {
 	if(str.length > maxLength) {
@@ -147,6 +147,9 @@ d3.json("data/dataset.json", function(error, data1) {
       else if(id===5){ d.selected = d.escolaridadeIgualSuperior }
       else if(id===6){ d.selected = d.consultas }
       
+      if (res[0]==d._id){
+        console.log("half match");
+      }
       //console.log(d);
   });
   
@@ -378,7 +381,7 @@ var res = elem1.split(":");
 
 console.log(res);
 
-graphGanho(selectedNutsCompare, 1);
+graphGanho(selectedNutsCompare, 1, res);
 drawTimeLine();
 
 
