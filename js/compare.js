@@ -136,27 +136,36 @@ d3.json("data/dataset.json", function(error, data1) {
         if (res && res[0]==data1[i]._id ){
         //console.log("half match: " + data1[i].ambito + ":" + res[1]);
         if (res[1] === data1[i].ambito ){ 
-
+			var iselementIngraph =false;
             if (!include(selectedNutsCompare, i)){
-
-            selectedNutsCompare.reverse();
-            selectedNutsCompare.push(i);
-            selectedNutsCompare.reverse();
-
-            selectedNutsCompare.pop();
-
-            //
-            //selectedNutsCompare.pop(0);
-            var out = selectedNutsCompare[0]
-            for (var j=1; j<5; j++){
-              out += "," + selectedNutsCompare[j]
-            } 
-            var elem = $("#selectedNUTSCompare")[0];
-            elem.innerHTML = out;
-            }}
-          }
+				for(var j=0; j<selectedNutsCompare.length; j++){
+					if(selectedNutsCompare[j]==i){
+						iselementIngraph=true;
+					}
+				}
+				if(!iselementIngraph){
+	            selectedNutsCompare.reverse();
+	            selectedNutsCompare.push(i);
+	            selectedNutsCompare.reverse();
+	
+	            selectedNutsCompare.pop();
+	
+	            //
+	            //selectedNutsCompare.pop(0);
+	            var out = selectedNutsCompare[0];
+	            for (var j=1; j<5; j++){
+	              out += "," + selectedNutsCompare[j]
+	            } 
+	            var elem = $("#selectedNUTSCompare")[0];
+	            elem.innerHTML = out;
+	            
+	            }
+	        }
+	   }
+       }
+       }
           
-        }
+        
         
         
   data1.forEach(function(d) {
@@ -262,7 +271,7 @@ d3.json("data/dataset.json", function(error, data1) {
 		d3.select(g).selectAll("circle").style("display","block");
 		d3.select(g).selectAll("text.value").style("display","none");
 	}
-})}
+})};
 
 function graphPoderCompra(selectedNutsCompare){
   
